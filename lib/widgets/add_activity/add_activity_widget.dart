@@ -1,5 +1,7 @@
 // Copyright 2022 The myAPFP Authors. All rights reserved.
 
+import 'package:apfp/widgets/confirmation_dialog/confirmation_dialog.dart';
+
 import '/util/validator/validator.dart';
 
 import '../activity_card/activity_card.dart';
@@ -40,12 +42,15 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
   List<String> exerciseTypes = [
     "Aerobic",
     'Body-Composition',
+    'Calisthenic',
     'Cardio',
     'Endurance',
     'Flexibility',
+    'Isometric ',
     'Kinesthetic',
     'Speed',
-    'Resistance-Strength',
+    'Resistance',
+    'Strength',
     "Total-Body"
   ];
 
@@ -144,13 +149,13 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
         child: Text('< Go Back', style: FlutterFlowTheme.subtitle2));
   }
 
-  /// Returns true if there are no 'APFP Activities' radio buttons selected.
+  /// Returns true if there are no 'Effective Activities' radio buttons selected.
   bool _noRadioButtonSelected() {
-    return (_radioButtonValue != "Cycling" &&
-        _radioButtonValue != "Rowing" &&
-        _radioButtonValue != "Step Mill" &&
-        _radioButtonValue != "Elliptical" &&
-        _radioButtonValue != "Resistance");
+    return (_radioButtonValue != "Walking" &&
+        _radioButtonValue != "Squats" &&
+        _radioButtonValue != "Lunges" &&
+        _radioButtonValue != "Push-ups" &&
+        _radioButtonValue != "Planks");
   }
 
   /// Returns a [Padding] which contains the TextFormField used for
@@ -341,7 +346,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
     );
   }
 
-  /// Returns a column of 'APFP Activities' radio buttons.
+  /// Returns a column of 'Effective Activities' radio buttons.
   Column _apfpActivityRadioButtons() {
     return Column(
       children: [
@@ -349,15 +354,15 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Expanded(
-              child: _radioButton(title: 'Cycling', exerciseType: 'Aerobic'),
+              child: _radioButton(title: 'Walking', exerciseType: 'Cardio'),
               flex: 1,
             ),
             Expanded(
-              child: _radioButton(title: 'Rowing', exerciseType: 'Total-Body'),
+              child: _radioButton(title: 'Squats', exerciseType: 'Strength'),
               flex: 1,
             ),
             Expanded(
-              child: _radioButton(title: 'Step Mill', exerciseType: 'Aerobic'),
+              child: _radioButton(title: 'Lunges', exerciseType: 'Cardio'),
               flex: 1,
             ),
           ],
@@ -366,11 +371,12 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
           children: [
             Expanded(
               flex: 1,
-              child: _radioButton(title: 'Elliptical', exerciseType: 'Aerobic'),
+              child:
+                  _radioButton(title: 'Push-ups', exerciseType: 'Calisthenic'),
             ),
             Expanded(
               flex: 1,
-              child: _radioButton(title: 'Resistance', exerciseType: 'Aerobic'),
+              child: _radioButton(title: 'Planks', exerciseType: 'Isometric'),
             ),
           ],
         ),
@@ -428,9 +434,29 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(15, 20, 0, 5),
-                      child: _label(
-                          text: 'APFP Activities',
-                          style: FlutterFlowTheme.title3),
+                      child: Row(
+                        children: [
+                          _label(
+                              text: 'Effective Activities',
+                              style: FlutterFlowTheme.title3),
+                          SizedBox(width: 10),
+                          InkWell(
+                              onTap: () {
+                                ConfirmationDialog.showConfirmationDialog(
+                                    context: context,
+                                    title: Text("Effective Activities"),
+                                    content: Text(
+                                        "These activities are proven to be very effective and are highly suggested." +
+                                            "\n\nTry them out if you're looking for a challenge!",
+                                        style: TextStyle(fontSize: 20)),
+                                    onSubmitTap: () => Navigator.pop(context),
+                                    onCancelTap: () => Navigator.pop(context),
+                                    cancelText: "Back",
+                                    submitText: "Ok");
+                              },
+                              child: Icon(Icons.error))
+                        ],
+                      ),
                     ),
                     _apfpActivityRadioButtons(),
                     Align(

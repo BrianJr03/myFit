@@ -13,7 +13,6 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 
 import 'widgets/home/home_widget.dart';
-import 'widgets/alerts/alerts_widget.dart';
 import 'widgets/welcome/welcome_widget.dart';
 import 'widgets/settings/settings_widget.dart';
 import 'widgets/activity/activity_widget.dart';
@@ -67,10 +66,6 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
 
   /// The APFP YouTube playlist id collection stream.
   Stream<QuerySnapshot> ytPlaylistStream = FireStore.getYTPlaylistIDs();
-
-  /// The announcements collection stream.
-  Stream<QuerySnapshot<Map<String, dynamic>>> announcements =
-      FireStore.getAnnouncements();
 
   /// A list of pages to be used in the Nav bar.
   List<Widget> pageList = [];
@@ -127,10 +122,8 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
   /// Adds all Widgets to [pageList] to be displayed in the Nav bar.
   void _initPageList() {
     pageList.add(HomeWidget(
-        announcementsStream: announcements,
         activityStream: userActivity,
         goalStream: userGoals));
-    pageList.add(AlertsWidget(announcementsStream: announcements));
     pageList.add(AtHomeExercisesWidget(
         playlistStream: ytPlaylistStream, videoStream: ytVideoStream));
     pageList.add(ActivityWidget(activityStream: userActivity));
@@ -250,14 +243,6 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
             ),
             label: 'Home',
             tooltip: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notifications,
-              size: 40,
-            ),
-            label: 'Alerts',
-            tooltip: 'Alerts',
           ),
           BottomNavigationBarItem(
             icon: FaIcon(

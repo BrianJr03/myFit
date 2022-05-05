@@ -33,13 +33,9 @@ class HomeWidget extends StatefulWidget {
   /// The user's activity document stream.
   final Stream<DocumentSnapshot<Map<String, dynamic>>> activityStream;
 
-  /// The announcements collection stream.
-  late final Stream<QuerySnapshot<Map<String, dynamic>>> announcementsStream;
-
   HomeWidget(
       {Key? key,
       required this.goalStream,
-      required this.announcementsStream,
       required this.activityStream})
       : super(key: key);
 
@@ -352,7 +348,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         _announcementRow("Activity Minutes: $time"),
         _announcementRow("Cals Burned: $cals"),
         _announcementRow("Steps Taken: $steps"),
-        _announcementRow("Miles Ran: $miles")
+        _announcementRow("Miles Traveled: $miles")
       ],
     );
   }
