@@ -4,6 +4,8 @@ import '/main.dart';
 
 import 'dart:async';
 
+import '/util/app_info/app_info.dart';
+
 import '/firebase/firestore.dart';
 
 import '../log_in_page/log_in_page_widget.dart';
@@ -89,18 +91,13 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
     ),
   };
 
-  /// Holds a list of admin emails stored in FireStore.
-  ///
-  /// This list is used to populate the email recipient list
-  /// when a user requests to contact administrators.
-  List<String>? adminEmails = [];
-
   /// Serves as key for the [Scaffold] found in [build].
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    AppInfo.init();
     startPageLoadAnimations(
       animationsMap.values
           .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
@@ -141,9 +138,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
   /// Returns APFP logo.
   Widget _apfpLogo() {
     return Image.asset(
-      'assets/images/BSU_APFP_logo.png',
-      width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * 0.3,
+      'assets/images/running_logo_2.png',
+      width: 100,
+      height: 100,
       fit: BoxFit.fitWidth,
     ).animated([animationsMap['imageOnPageLoadAnimation']]);
   }
@@ -193,24 +190,14 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
     );
   }
 
-  /// Retrieves admin emails stored in Firestore.
-  void getAdminEmails() {
-    FireStore.getAdminEmails().then((value) {
-      value.docs
-        ..forEach((element) {
-          adminEmails!.add(element["email"]);
-        });
-    });
-  }
-
   /// Text shown detailing how to contact an APFP admin.
   Padding _contactAdminText() {
     return Padding(
         padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
         child: AutoSizeText.rich(
           TextSpan(
-              text: 'This app is intended for members of the APFP at BSU.' +
-                  ' If you are not an active member, you can contact an administrator by ',
+              text: 'This app is intended for anyone who wants a bit of fitness in their lives.' +
+                  ' If you would like to do so, you can contact a developer by ',
               style: FlutterFlowTheme.subtitle1,
               children: <InlineSpan>[
                 TextSpan(
@@ -222,9 +209,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
                         EmailContent email = EmailContent(
-                            to: adminEmails,
-                            subject: 'APFP Membership',
-                            body: 'Hello, how can I become a member?');
+                            to: ["thaballa79@gmail.com"],
+                            subject: 'myFit',
+                            body: 'Hello, ');
                         OpenMailAppResult result =
                             await OpenMailApp.composeNewEmailInMailApp(
                                 nativePickerTitle:
@@ -336,7 +323,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
           future: _initFirebaseApp(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              getAdminEmails();
               return SafeArea(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -347,9 +333,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                     _contactAdminText(),
                     _logInButton(),
                     _createAccountButton(),
-                    SizedBox(
-                      height: 25,
-                    )
+                    Text("${AppInfo.name} | v${AppInfo.version}",
+                        style: FlutterFlowTheme.bodyText1)
                   ],
                 ),
               );

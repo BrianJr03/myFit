@@ -5,7 +5,7 @@
    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
 
    <application
-        android:label="myAPFP"
+        android:label="myFit"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">

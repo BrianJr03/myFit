@@ -281,9 +281,9 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
             tooltip: 'Settings',
           )
         ],
-        backgroundColor: Color(0xFF54585A),
+        backgroundColor: Color(0xFF121212),
         currentIndex: _currentPage,
-        selectedItemColor: Color(0xFFBA0C2F),
+        selectedItemColor: Colors.lightBlue,
         unselectedItemColor: FlutterFlowTheme.tertiaryColor,
         onTap: (i) {
           setState(() => _currentPage = i);

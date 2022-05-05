@@ -22,10 +22,8 @@ import '../home_page_graphic/hp_graphic.dart';
 import 'package:intl/intl.dart';
 import 'package:health/health.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -81,11 +79,6 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   /// Entrypoint to health API.
   HealthFactory health = HealthFactory();
-
-  /// Set to true when health data is being fetched.
-  bool _isFetchingHealthData = false;
-
- 
 
   /// Indicates if this screen has been disposed of.
   bool _disposed = false;
@@ -236,9 +229,6 @@ class _HomeWidgetState extends State<HomeWidget> {
     await HealthFactory.hasPermissions(dataTypes).then((value) async {
       if (value == null || value) {
         if (mounted) {
-          setState(() {
-            _isFetchingHealthData = true;
-          });
           try {
             List<HealthDataType> calorieTypes = List.empty(growable: true);
             if (Platform.isIOS)
@@ -265,7 +255,6 @@ class _HomeWidgetState extends State<HomeWidget> {
             Goal.userProgressCalGoal = cals;
             Goal.userProgressStepGoal = steps.toDouble();
             Goal.userProgressMileGoal = miles;
-            _isFetchingHealthData = false;
           });
           FireStore.updateGoalData({
             "calGoalProgress": Goal.userProgressCalGoal,
@@ -280,7 +269,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   /// Label used above the [_recentAnnouncementGrid].
   Padding _recentAnnouncementsLabel() {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 0, 0),
+      padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -288,7 +277,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             width: MediaQuery.of(context).size.width * 0.92,
             height: MediaQuery.of(context).size.height * 0.06,
             child: AutoSizeText(
-              'Recent Announcements',
+              'My Daily Stats',
               style: FlutterFlowTheme.title1,
               maxLines: 1,
               overflow: TextOverflow.fade,
@@ -328,7 +317,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           Padding(
               padding: EdgeInsetsDirectional.all(3),
               child: Icon(
-                Icons.error_outline,
+                Icons.analytics,
                 key: Key("Home.infoIcon"),
                 color: FlutterFlowTheme.secondaryColor,
                 size: 22,
@@ -344,8 +333,12 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 
   /// Creates GridView to display recent announcements.
-  GridView _recentAnnouncementGrid(
-      String alertOneText, String alertTwoText, String alertThreeText) {
+  GridView _recentAnnouncementGrid() {
+    var formatter = NumberFormat("###,###", "en_US");
+    var time = Goal.userProgressExerciseTime;
+    var cals = formatter.format(Goal.userProgressCalGoal);
+    var steps = formatter.format(Goal.userProgressStepGoal);
+    var miles = Goal.userProgressMileGoal;
     return GridView(
       padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -356,16 +349,16 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       shrinkWrap: true,
       children: [
-        _announcementRow(alertOneText),
-        _announcementRow(alertTwoText),
-        _announcementRow(alertThreeText)
+        _announcementRow("Activity Minutes: $time"),
+        _announcementRow("Cals Burned: $cals"),
+        _announcementRow("Steps Taken: $steps"),
+        _announcementRow("Miles Ran: $miles")
       ],
     );
   }
 
   /// Wraps the [_recentAnnouncementGrid], and provides border decoration.
-  Container _announcements(
-      String alertOneText, String alertTwoText, String alertThreeText) {
+  Container _announcements() {
     return Container(
       key: Key('Home.announcements'),
       width: MediaQuery.of(context).size.width * 0.9,
@@ -376,14 +369,11 @@ class _HomeWidgetState extends State<HomeWidget> {
           width: 2,
         ),
       ),
-      child:
-          _recentAnnouncementGrid(alertOneText, alertTwoText, alertThreeText),
+      child: _recentAnnouncementGrid(),
     );
   }
 
   /// Label used above [_goalsTabbedContainer].
-  ///
-  /// This will be set to 'Daily Goals'.
   Padding _goalTypeLabel() {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(
@@ -394,7 +384,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          AutoSizeText('$_goalType Goals', style: FlutterFlowTheme.title1),
+          AutoSizeText('My $_goalType Goals', style: FlutterFlowTheme.title1),
         ],
       ),
     );
@@ -482,7 +472,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             SetGoalsWidget.launch(context);
           } else
             Toasted.showToast(
-              "Please sync your ${DevicePlatform.platformHealthName} to continue.");
+                "Please sync your ${DevicePlatform.platformHealthName} to continue.");
         },
         context: context,
         goalProgress:
@@ -524,66 +514,6 @@ class _HomeWidgetState extends State<HomeWidget> {
             : Goal.userProgressMileGoal / Goal.userMileEndGoal);
   }
 
-  /// The view displayed in the 'APFP' tab of the [_goalsTabbedContainer].
-  InkWell _apfpGoalsView() {
-    return HPGraphic.createAPFPView(
-        key: Key("Home.apfpView"),
-        context: context,
-        goal1ProgressInfo: Goal.isCyclingGoalSet
-            ? "Cycling - ${Goal.userProgressCyclingGoal.toStringAsFixed(0)} / ${Goal.userCyclingEndGoal.toStringAsFixed(0)} min"
-            : "Cycling Goal Not Active",
-        goal2ProgressInfo: Goal.isRowingGoalSet
-            ? "Rowing - ${Goal.userProgressRowingGoal.toStringAsFixed(0)} / ${Goal.userRowingEndGoal.toStringAsFixed(0)} min"
-            : "Rowing Goal Not Active",
-        goal3ProgressInfo: Goal.isStepMillGoalSet
-            ? "Step Mill - ${Goal.userProgressStepMillGoal.toStringAsFixed(0)} / ${Goal.userStepMillEndGoal.toStringAsFixed(0)} min"
-            : "Step Mill Goal Not Active",
-        goal4ProgressInfo: Goal.isEllipticalGoalSet
-            ? "Elliptical - ${Goal.userProgressEllipticalGoal.toStringAsFixed(0)} / ${Goal.userEllipticalEndGoal.toStringAsFixed(0)} min"
-            : "Elliptical Goal Not Active",
-        goal5ProgressInfo: Goal.isResistanceStrengthGoalSet
-            ? "Resistance - ${Goal.userProgressResistanceStrengthGoal.toStringAsFixed(0)} / ${Goal.userResistanceStrengthEndGoal.toStringAsFixed(0)} min"
-            : "Resistance Goal Not Active",
-        percent1: Goal.isCyclingGoalSet
-            ? (Goal.userProgressCyclingGoal / Goal.userCyclingEndGoal) > 1.0
-                ? 1.0
-                : Goal.userProgressCyclingGoal / Goal.userCyclingEndGoal
-            : 0,
-        percent2: Goal.isRowingGoalSet
-            ? (Goal.userProgressRowingGoal / Goal.userRowingEndGoal) > 1.0
-                ? 1.0
-                : Goal.userProgressRowingGoal / Goal.userRowingEndGoal
-            : 0,
-        percent3: Goal.isStepMillGoalSet
-            ? (Goal.userProgressStepMillGoal / Goal.userStepMillEndGoal) > 1.0
-                ? 1.0
-                : Goal.userProgressStepMillGoal / Goal.userStepMillEndGoal
-            : 0,
-        percent4: Goal.isEllipticalGoalSet
-            ? (Goal.userProgressEllipticalGoal / Goal.userEllipticalEndGoal) >
-                    1.0
-                ? 1.0
-                : Goal.userProgressEllipticalGoal / Goal.userEllipticalEndGoal
-            : 0,
-        percent5: Goal.isResistanceStrengthGoalSet
-            ? (Goal.userProgressResistanceStrengthGoal /
-                        Goal.userResistanceStrengthEndGoal) >
-                    1.0
-                ? 1.0
-                : Goal.userProgressResistanceStrengthGoal /
-                    Goal.userResistanceStrengthEndGoal
-            : 0,
-        onLongPress: () {
-          SetGoalsWidget.launch(context);
-        },
-        scrollController: _apfpSC,
-        isGoal1Set: Goal.isCyclingGoalSet,
-        isGoal2Set: Goal.isRowingGoalSet,
-        isGoal3Set: Goal.isStepMillGoalSet,
-        isGoal4Set: Goal.isEllipticalGoalSet,
-        isGoal5Set: Goal.isResistanceStrengthGoalSet);
-  }
-
   /// Adds a delimiter to separate a user's goal progress and their end goal.
   static String progressDelimiter(String progressStr) {
     String delimiter = "";
@@ -614,13 +544,11 @@ class _HomeWidgetState extends State<HomeWidget> {
           InkWell(key: Key("Home.calsTab"), child: Text('Calories')),
           InkWell(key: Key("Home.stepsTab"), child: Text('Steps')),
           InkWell(key: Key("Home.milesTab"), child: Text('Miles')),
-          InkWell(key: Key("Home.apfpTab"), child: Text('APFP')),
         ], views: [
           _exerciseTimeView(),
           _calsView(),
           _stepsView(),
           _milesView(),
-          _apfpGoalsView()
         ]),
       ),
     );
@@ -635,7 +563,8 @@ class _HomeWidgetState extends State<HomeWidget> {
             await Permission.activityRecognition.isGranted) {
           FireStore.updateGoalData({"isHealthAppSynced": true});
           _fetchHealthData();
-          Toasted.showToast("${DevicePlatform.platformHealthName} has been synchronized!");
+          Toasted.showToast(
+              "${DevicePlatform.platformHealthName} has been synchronized!");
         } else if (Platform.isIOS &&
             await HealthFactory().getHealthDataFromTypes(
                 DateTime(DateTime.now().year, DateTime.now().month,
@@ -656,9 +585,11 @@ class _HomeWidgetState extends State<HomeWidget> {
             })) {
           FireStore.updateGoalData({"isHealthAppSynced": true});
           _fetchHealthData();
-          Toasted.showToast("${DevicePlatform.platformHealthName} has been synchronized!");
+          Toasted.showToast(
+              "${DevicePlatform.platformHealthName} has been synchronized!");
         } else {
-          Toasted.showToast("Visit Activity tab to sync ${DevicePlatform.platformHealthName}");
+          Toasted.showToast(
+              "Visit Activity tab to sync ${DevicePlatform.platformHealthName}");
         }
       },
       text: 'Sync ${DevicePlatform.platformHealthName}',
@@ -675,43 +606,6 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
   }
 
-  /// Displays the health data carousel.
-  ///
-  /// The user is shown:
-  /// - Activity Time
-  /// - Calories Burned Today
-  /// - Steps Taken Today
-  /// - Miles Ran Today
-  CarouselSlider _healthDataCarousel() {
-    var formatter = NumberFormat("###,###", "en_US");
-    var time = Goal.userProgressExerciseTime;
-    var cals = formatter.format(Goal.userProgressCalGoal);
-    var steps = formatter.format(Goal.userProgressStepGoal);
-    var miles = Goal.userProgressMileGoal;
-    return CarouselSlider(
-      options: CarouselOptions(
-          height: 30, autoPlay: true, autoPlayInterval: Duration(seconds: 3)),
-      items: [
-        Text(
-          "Activity Minutes: $time",
-          style: FlutterFlowTheme.bodyText1,
-        ),
-        Text(
-          "Cals Burned Today: $cals",
-          style: FlutterFlowTheme.bodyText1,
-        ),
-        Text(
-          "Steps Taken Today: $steps",
-          style: FlutterFlowTheme.bodyText1,
-        ),
-        Text(
-          "Miles Ran Today: $miles",
-          style: FlutterFlowTheme.bodyText1,
-        )
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -723,47 +617,10 @@ class _HomeWidgetState extends State<HomeWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             _recentAnnouncementsLabel(),
-            StreamBuilder(
-                stream: widget.announcementsStream,
-                builder: (context,
-                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                        snapshot) {
-                  if (snapshot.hasData) {
-                    var topics = [
-                      'Alerts',
-                      FirebaseAuth.instance.currentUser!.displayName!
-                          .replaceAll(" ", "")
-                    ];
-                    List<String> alertTexts = new List.empty(growable: true);
-                    for (QueryDocumentSnapshot document
-                        in snapshot.data!.docs) {
-                      if (topics.contains(document['topic'])) {
-                        alertTexts.add(document['title']);
-                      }
-                    }
-                    if (alertTexts.length < 3) {
-                      for (int i = alertTexts.length; i < 4; i++) {
-                        alertTexts.add("No announcement available");
-                      }
-                    }
-                    return _announcements(
-                        alertTexts[0], alertTexts[1], alertTexts[2]);
-                  } else {
-                    return Text("No announcements available.");
-                  }
-                }),
+            _announcements(),
             _goalTypeLabel(),
             _goalsTabbedContainer(),
-            SizedBox(height: 25),
-            !_isFetchingHealthData && Goal.isHealthAppSynced
-                ? _healthDataCarousel()
-                : Goal.isHealthAppSynced
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [CircularProgressIndicator()],
-                      )
-                    : Container(height: 0, width: 0),
-            SizedBox(height: 5),
+            SizedBox(height: 20),
             Goal.isHealthAppSynced
                 ? _refreshHealthData()
                 : _syncHealthAppButton(),

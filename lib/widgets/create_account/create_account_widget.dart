@@ -160,18 +160,10 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
               ),
               child: Text.rich(
                 TextSpan(
-                    text: 'Welcome to the myAPFP app.' +
-                        ' Please enter the details below to create your account.',
-                    style: FlutterFlowTheme.subtitle1,
-                    children: <InlineSpan>[
-                      TextSpan(
-                        text: '\nAPFP Membership is required to sign up.',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: FlutterFlowTheme.secondaryColor),
-                      )
-                    ]),
+                  text: 'Welcome to the myFit app.' +
+                      ' Please enter the details below to create your account.',
+                  style: FlutterFlowTheme.subtitle1,
+                ),
                 textAlign: TextAlign.center,
               ))
         ],

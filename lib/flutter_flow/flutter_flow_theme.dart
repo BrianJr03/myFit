@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FlutterFlowTheme {
   static const Color primaryColor = Color(0xFF000000);
-  static const Color secondaryColor = Color(0xFFBA0C2F);
+  static const Color secondaryColor = Color(0xFF1434A4);
   static const Color tertiaryColor = Color(0xFFFFFFFF);
 
   static TextStyle get title1 => TextStyle().copyWith(
