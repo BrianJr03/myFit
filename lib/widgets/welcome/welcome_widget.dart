@@ -6,8 +6,6 @@ import 'dart:async';
 
 import '/util/app_info/app_info.dart';
 
-import '/firebase/firestore.dart';
-
 import '../log_in_page/log_in_page_widget.dart';
 
 import '../create_account/create_account_widget.dart';
@@ -157,7 +155,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Loading myAPFP...", style: TextStyle(fontSize: 20)),
+              Text("Loading myFit...", style: TextStyle(fontSize: 20)),
               SizedBox(height: 50),
               CircularProgressIndicator(),
             ])
