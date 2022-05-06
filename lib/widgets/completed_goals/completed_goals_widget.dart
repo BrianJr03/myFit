@@ -56,9 +56,6 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
   /// A list of daily miles [_goalCard] widgets.
   List<Widget> _mileGoals = [];
 
-  /// A list of daily 'APFP' [_goalCard] widgets.
-  List<Widget> _apfpGoals = [];
-
   /// Index associated with the selected radio button within [_radioButtonsCard].
   ///
   /// Default value is 1 which corresponds to the "Time" radio button.
@@ -208,7 +205,6 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
     _calGoals.clear();
     _stepGoals.clear();
     _mileGoals.clear();
-    _apfpGoals.clear();
   }
 
   /// Returns true if the [_timeGoals], [_calGoals],
@@ -217,8 +213,7 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
     return _timeGoals.isEmpty &&
         _calGoals.isEmpty &&
         _stepGoals.isEmpty &&
-        _mileGoals.isEmpty &&
-        _apfpGoals.isEmpty;
+        _mileGoals.isEmpty;
   }
 
   /// Pre-loads previously completed daily goals stored in Firestore.
@@ -255,10 +250,6 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
                 _mileGoals.add(goalCard);
               });
               break;
-            default:
-              setState(() {
-                _apfpGoals.add(goalCard);
-              });
           }
         });
       }));
@@ -274,8 +265,6 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
         return _stepGoals;
       case 4:
         return _mileGoals;
-      case 5:
-        return _apfpGoals;
     }
     return _timeGoals;
   }
@@ -369,26 +358,6 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
             ),
           ],
         ),
-        Column(
-          children: [
-            Text("APFP"),
-            SizedBox(height: 5),
-            GFRadio(
-              type: GFRadioType.square,
-              size: 20,
-              value: 5,
-              groupValue: _groupValue,
-              onChanged: (value) {
-                setState(() {
-                  _groupValue = int.parse(value.toString());
-                });
-              },
-              inactiveIcon: null,
-              activeBorderColor: FlutterFlowTheme.secondaryColor,
-              radioColor: FlutterFlowTheme.secondaryColor,
-            ),
-          ],
-        )
       ],
     ));
   }

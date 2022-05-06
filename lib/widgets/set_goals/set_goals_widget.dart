@@ -69,15 +69,6 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
   /// [TextEditingController] for the Exercise Time textField.
   TextEditingController? _exerciseGoalController = TextEditingController();
 
-  /// [TextEditingController] for the Cycling textField.
-  TextEditingController? _cyclingGoalController = TextEditingController();
-
-  /// [TextEditingController] for the Rowing textField.
-  TextEditingController? _rowingGoalController = TextEditingController();
-
-  /// [TextEditingController] for the Step Mill textField.
-  TextEditingController? _stepMillGoalController = TextEditingController();
-
   /// [TextEditingController] for the Calories textField.
   TextEditingController? _caloriesGoalController = TextEditingController();
 
@@ -86,13 +77,6 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
 
   /// [TextEditingController] for the Steps textField.
   TextEditingController? _stepGoalController = TextEditingController();
-
-  /// [TextEditingController] for the Elliptical textField.
-  TextEditingController? _ellipticalGoalController = TextEditingController();
-
-  /// [TextEditingController] for the Resistance/Strength textField.
-  TextEditingController? _resistanceStrengthGoalController =
-      TextEditingController();
 
   @override
   void initState() {
@@ -104,14 +88,9 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
   void dispose() {
     super.dispose();
     _exerciseGoalController!.dispose();
-    _cyclingGoalController!.dispose();
-    _rowingGoalController!.dispose();
-    _stepMillGoalController!.dispose();
     _caloriesGoalController!.dispose();
     _milesGoalController!.dispose();
     _stepGoalController!.dispose();
-    _ellipticalGoalController!.dispose();
-    _resistanceStrengthGoalController!.dispose();
   }
 
   /// Set's [contr]'s text to an end goal value in Firestore, based on
@@ -135,15 +114,9 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
     var docEntries = doc.data()!.entries;
     docEntries.forEach((element) {
       setText(element, 'exerciseTimeEndGoal', _exerciseGoalController);
-      setText(element, 'cyclingEndGoal', _cyclingGoalController);
-      setText(element, 'rowingEndGoal', _rowingGoalController);
-      setText(element, 'stepMillEndGoal', _stepMillGoalController);
       setText(element, "calEndGoal", _caloriesGoalController);
       setText(element, "mileEndGoal", _milesGoalController);
       setText(element, "stepEndGoal", _stepGoalController);
-      setText(element, "ellipticalEndGoal", _ellipticalGoalController);
-      setText(element, "resistanceStrengthEndGoal",
-          _resistanceStrengthGoalController);
     });
   }
 
@@ -158,30 +131,6 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
         key: Key("SetGoal.goBackBTN"),
         onTap: () => Navigator.pop(context),
         child: Text('< Go Back', style: FlutterFlowTheme.subtitle2));
-  }
-
-  /// Button to allow a user to switch between daily or weekly goals.
-  Padding _switchGoalViewBTN() {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 40),
-      child: FFButtonWidget(
-        key: Key("SetGoal.switchGoalViewBTN"),
-        onPressed: () => setState(() {
-          _isAPFPGoalsDisplayed = !_isAPFPGoalsDisplayed;
-        }),
-        text: _isAPFPGoalsDisplayed ? 'Set Regular Goals' : 'Set APFP Goals',
-        options: FFButtonOptions(
-          width: MediaQuery.of(context).size.width * 0.5,
-          height: 50,
-          color: FlutterFlowTheme.secondaryColor,
-          textStyle: FlutterFlowTheme.title2,
-          borderSide: BorderSide(
-            color: FlutterFlowTheme.secondaryColor,
-          ),
-          borderRadius: 8,
-        ),
-      ),
-    );
   }
 
   /// Creates a button that allows a user to set a goal.
@@ -333,291 +282,130 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
   /// Based on [_isAPFPGoalsDisplayed], this will return a list of widgets
   /// associated with daily regular goals or 'APFP' goals.
   List<Widget> _dailyGoalsUI() {
-    return !_isAPFPGoalsDisplayed
-        ? [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child:
-                  _label(text: 'Exercise Goal', style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _exerciseFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Total Minutes",
-                      contr: _exerciseGoalController!,
-                      key: Key("SetGoal.exerciseGoalTextField_daily")),
-                  _setGoalButton(_exerciseFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "exerciseTimeEndGoal": double.parse(
-                          _exerciseGoalController!.text.toString()),
-                      "isExerciseTimeGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setExerciseGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData({
-                      "exerciseTimeEndGoal": 0.0,
-                      "isExerciseTimeGoalSet": false
-                    }).then((value) {
-                      _exerciseGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child:
-                  _label(text: 'Calories Goal', style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _caloriesFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Calories",
-                      contr: _caloriesGoalController!,
-                      unitOfMeasure: "calories",
-                      goalType: "Daily",
-                      key: Key("SetGoal.calGoalTextField_daily")),
-                  _setGoalButton(_caloriesFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "calEndGoal": double.parse(
-                          _caloriesGoalController!.text.toString()),
-                      "isCalGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setCalGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData(
-                            {"calEndGoal": 0.0, "isCalGoalSet": false})
-                        .then((value) {
-                      _caloriesGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child: _label(text: 'Miles Goal', style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _milesFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Miles",
-                      contr: _milesGoalController!,
-                      unitOfMeasure: "mile(s)",
-                      goalType: "Daily",
-                      key: Key("SetGoal.mileGoalTextField_daily"),
-                      allowDoubleAsInput: true),
-                  _setGoalButton(_milesFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "mileEndGoal": double.parse(
-                          double.parse(_milesGoalController!.text.toString())
-                              .toStringAsFixed(1)),
-                      "isMileGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setMileGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData(
-                            {"mileEndGoal": 0.0, "isMileGoalSet": false})
-                        .then((value) {
-                      _milesGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child: _label(text: 'Steps Goal', style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _stepFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Steps",
-                      contr: _stepGoalController!,
-                      unitOfMeasure: "steps",
-                      goalType: "Daily",
-                      key: Key("SetGoal.stepGoalTextField_daily")),
-                  _setGoalButton(_stepFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "stepEndGoal":
-                          double.parse(_stepGoalController!.text.toString()),
-                      "isStepGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setStepGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData(
-                            {"stepEndGoal": 0.0, "isStepGoalSet": false})
-                        .then((value) {
-                      _stepGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            )
-          ]
-        : [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child:
-                  _label(text: 'Cycling Goal', style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _cyclingFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Total Minutes",
-                      contr: _cyclingGoalController!,
-                      key: Key("SetGoal.cyclingGoalTextField_daily")),
-                  _setGoalButton(_cyclingFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "cyclingEndGoal":
-                          double.parse(_cyclingGoalController!.text.toString()),
-                      "isCyclingGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setCyclingGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData(
-                            {"cyclingEndGoal": 0, "isCyclingGoalSet": false})
-                        .then((value) {
-                      _cyclingGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child:
-                  _label(text: 'Rowing Goal', style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _rowingFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Total Minutes",
-                      contr: _rowingGoalController!,
-                      key: Key("SetGoal.rowingGoalTextField_daily")),
-                  _setGoalButton(_rowingFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "rowingEndGoal":
-                          double.parse(_rowingGoalController!.text.toString()),
-                      "isRowingGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setRowingGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData(
-                            {"rowingEndGoal": 0, "isRowingGoalSet": false})
-                        .then((value) {
-                      _rowingGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child: _label(
-                  text: 'Step Mill Goal', style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _stepMillFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Total Minutes",
-                      contr: _stepMillGoalController!,
-                      key: Key("SetGoal.stepMillGoalTextField_daily")),
-                  _setGoalButton(_stepMillFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "stepMillEndGoal": double.parse(
-                          _stepMillGoalController!.text.toString()),
-                      "isStepMillGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setStepMillGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData(
-                            {"stepMillEndGoal": 0, "isStepMillGoalSet": false})
-                        .then((value) {
-                      _stepMillGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child: _label(
-                  text: 'Elliptical Goal', style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _ellipticalFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Total Minutes",
-                      contr: _ellipticalGoalController!,
-                      key: Key("SetGoal.ellipticalGoalTextField_daily")),
-                  _setGoalButton(_ellipticalFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "ellipticalEndGoal": double.parse(
-                          _ellipticalGoalController!.text.toString()),
-                      "isEllipticalGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setEllipticalGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData({
-                      "ellipticalEndGoal": 0,
-                      "isEllipticalGoalSet": false
-                    }).then((value) {
-                      _ellipticalGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
-              child: _label(
-                  text: 'Resistance-Strength\nGoal',
-                  style: FlutterFlowTheme.title3),
-            ),
-            Form(
-              key: _resistanceStrengthFormKey,
-              child: Row(
-                children: [
-                  _goalTextField(
-                      hintText: "Total Minutes",
-                      contr: _resistanceStrengthGoalController!,
-                      key: Key("SetGoal.resStrengthGoalTextField_daily")),
-                  _setGoalButton(_resistanceStrengthFormKey, () async {
-                    await FireStore.updateGoalData({
-                      "resistanceStrengthEndGoal": double.parse(
-                          _resistanceStrengthGoalController!.text.toString()),
-                      "isResistanceStrengthGoalSet": true
-                    });
-                  }, key: Key("SetGoal.setResStrengthGoalBTN_daily")),
-                  _deleteGoalIcon(onTap: () async {
-                    await FireStore.updateGoalData({
-                      "resistanceStrengthEndGoal": 0,
-                      "isResistanceStrengthGoalSet": false
-                    }).then((value) {
-                      _resistanceStrengthGoalController!.text = '';
-                    });
-                  })
-                ],
-              ),
-            )
-          ];
+    return [
+      Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
+        child: _label(text: 'Exercise Goal', style: FlutterFlowTheme.title3),
+      ),
+      Form(
+        key: _exerciseFormKey,
+        child: Row(
+          children: [
+            _goalTextField(
+                hintText: "Total Minutes",
+                contr: _exerciseGoalController!,
+                key: Key("SetGoal.exerciseGoalTextField_daily")),
+            _setGoalButton(_exerciseFormKey, () async {
+              await FireStore.updateGoalData({
+                "exerciseTimeEndGoal":
+                    double.parse(_exerciseGoalController!.text.toString()),
+                "isExerciseTimeGoalSet": true
+              });
+            }, key: Key("SetGoal.setExerciseGoalBTN_daily")),
+            _deleteGoalIcon(onTap: () async {
+              await FireStore.updateGoalData({
+                "exerciseTimeEndGoal": 0.0,
+                "isExerciseTimeGoalSet": false
+              }).then((value) {
+                _exerciseGoalController!.text = '';
+              });
+            })
+          ],
+        ),
+      ),
+      Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
+        child: _label(text: 'Calories Goal', style: FlutterFlowTheme.title3),
+      ),
+      Form(
+        key: _caloriesFormKey,
+        child: Row(
+          children: [
+            _goalTextField(
+                hintText: "Calories",
+                contr: _caloriesGoalController!,
+                unitOfMeasure: "calories",
+                goalType: "Daily",
+                key: Key("SetGoal.calGoalTextField_daily")),
+            _setGoalButton(_caloriesFormKey, () async {
+              await FireStore.updateGoalData({
+                "calEndGoal":
+                    double.parse(_caloriesGoalController!.text.toString()),
+                "isCalGoalSet": true
+              });
+            }, key: Key("SetGoal.setCalGoalBTN_daily")),
+            _deleteGoalIcon(onTap: () async {
+              await FireStore.updateGoalData(
+                  {"calEndGoal": 0.0, "isCalGoalSet": false}).then((value) {
+                _caloriesGoalController!.text = '';
+              });
+            })
+          ],
+        ),
+      ),
+      Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
+        child: _label(text: 'Miles Goal', style: FlutterFlowTheme.title3),
+      ),
+      Form(
+        key: _milesFormKey,
+        child: Row(
+          children: [
+            _goalTextField(
+                hintText: "Miles",
+                contr: _milesGoalController!,
+                unitOfMeasure: "mile(s)",
+                goalType: "Daily",
+                key: Key("SetGoal.mileGoalTextField_daily"),
+                allowDoubleAsInput: true),
+            _setGoalButton(_milesFormKey, () async {
+              await FireStore.updateGoalData({
+                "mileEndGoal": double.parse(
+                    double.parse(_milesGoalController!.text.toString())
+                        .toStringAsFixed(1)),
+                "isMileGoalSet": true
+              });
+            }, key: Key("SetGoal.setMileGoalBTN_daily")),
+            _deleteGoalIcon(onTap: () async {
+              await FireStore.updateGoalData(
+                  {"mileEndGoal": 0.0, "isMileGoalSet": false}).then((value) {
+                _milesGoalController!.text = '';
+              });
+            })
+          ],
+        ),
+      ),
+      Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(15, 30, 0, 5),
+        child: _label(text: 'Steps Goal', style: FlutterFlowTheme.title3),
+      ),
+      Form(
+        key: _stepFormKey,
+        child: Row(
+          children: [
+            _goalTextField(
+                hintText: "Steps",
+                contr: _stepGoalController!,
+                unitOfMeasure: "steps",
+                goalType: "Daily",
+                key: Key("SetGoal.stepGoalTextField_daily")),
+            _setGoalButton(_stepFormKey, () async {
+              await FireStore.updateGoalData({
+                "stepEndGoal":
+                    double.parse(_stepGoalController!.text.toString()),
+                "isStepGoalSet": true
+              });
+            }, key: Key("SetGoal.setStepGoalBTN_daily")),
+            _deleteGoalIcon(onTap: () async {
+              await FireStore.updateGoalData(
+                  {"stepEndGoal": 0.0, "isStepGoalSet": false}).then((value) {
+                _stepGoalController!.text = '';
+              });
+            })
+          ],
+        ),
+      )
+    ];
   }
 
   @override
@@ -647,12 +435,6 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                   SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _switchGoalViewBTN(),
-                    ],
-                  )
                 ]),
           ))),
     );
