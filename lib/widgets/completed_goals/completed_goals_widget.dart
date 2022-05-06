@@ -257,7 +257,7 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
   }
 
   /// Returns the associated [_goalCard] list based on [_groupValue].
-  List<Widget> getGoalList() {
+  List<Widget> _getGoalList() {
     switch (_groupValue) {
       case 2:
         return _calGoals;
@@ -413,9 +413,9 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
             SizedBox(height: 15),
             Column(
                 mainAxisSize: MainAxisSize.max,
-                children: getGoalList().isEmpty
+                children: _getGoalList().isEmpty
                     ? [_noGoalsCompletedText()]
-                    : getGoalList()),
+                    : _getGoalList()),
             SizedBox(height: 10)
           ]),
         )));
