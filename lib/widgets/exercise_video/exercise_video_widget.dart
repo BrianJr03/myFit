@@ -158,7 +158,8 @@ class _ExerciseVideoWidgetState extends State<ExerciseVideoWidget> {
                     key: Key('Video.videoDescriptionBody'),
                     padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 0),
                     child: _descriptionBody,
-                  )
+                  ),
+                  SizedBox(height: 10)
                 ],
               ),
             ),

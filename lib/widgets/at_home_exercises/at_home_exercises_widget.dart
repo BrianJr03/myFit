@@ -79,8 +79,8 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
           child: Row(mainAxisSize: MainAxisSize.max, children: [
             Expanded(
                 child: Text(
-                    'The following videos are some exercises that can be done at home.' +
-                        ' Please remember to be safe when exercising.',
+                    'These are just a few of my fav songs.' + 
+                    '\n(this screen is to be deleted soon)',
                     key: Key('Exercises.description'),
                     style: FlutterFlowTheme.bodyText1))
           ]))
