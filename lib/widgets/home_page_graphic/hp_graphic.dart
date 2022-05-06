@@ -2,7 +2,7 @@
 
 import 'dart:io';
 
-import 'package:apfp/util/platform/device_platform.dart';
+import 'package:myFit/util/platform/device_platform.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
 

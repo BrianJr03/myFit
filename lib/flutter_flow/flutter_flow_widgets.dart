@@ -1,4 +1,4 @@
-import 'package:apfp/flutter_flow/flutter_flow_theme.dart';
+import 'package:myFit/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 

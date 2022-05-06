@@ -1,6 +1,6 @@
 // Copyright 2022 The myAPFP Authors. All rights reserved.
 
-import 'package:apfp/util/toasted/toasted.dart';
+import 'package:myFit/util/toasted/toasted.dart';
 
 import '/firebase/firestore.dart';
 

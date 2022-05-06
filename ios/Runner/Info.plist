@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>myAPFP</string>
+	<string>myFit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -44,11 +44,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Used to attach photos to your workouts</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Used to import exercise activity to be shared with APFP administrators</string>
+	<string>Used to import exercise activity to be shared with myFit administrators</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Used to import exercise activity to be shared with APFP administrators</string>
+	<string>Used to import exercise activity to be shared with myFit administrators</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Used to import exercise activity to be shared with APFP administrators</string>
+	<string>Used to import exercise activity to be shared with myFit administrators</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Used to record audio that can be attached to your workouts</string>
 	<key>NSPhotoLibraryUsageDescription</key>
