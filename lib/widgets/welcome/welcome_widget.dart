@@ -4,6 +4,8 @@ import '/main.dart';
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import '/util/app_info/app_info.dart';
 
 import '../log_in_page/log_in_page_widget.dart';
@@ -331,7 +333,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                     _contactAdminText(),
                     _logInButton(),
                     _createAccountButton(),
-                    Text("${AppInfo.name} | v${AppInfo.version}",
+                    Text(
+                        "${AppInfo.name} | v${AppInfo.version} ${kDebugMode ? "- debug" : ""}",
                         style: FlutterFlowTheme.bodyText1)
                   ],
                 ),
