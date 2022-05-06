@@ -33,20 +33,8 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
   /// Controls the [CircularProgressIndicator] loading animation of a button.
   bool _loadingButton = false;
 
-  /// Indicates if the 'APFP' goal textFields are shown.
-  bool _isAPFPGoalsDisplayed = false;
-
   /// Used to validate the current input of the Exercise Time textField.
   final _exerciseFormKey = GlobalKey<FormState>();
-
-  /// Used to validate the current input of the Cycling textField.
-  final _cyclingFormKey = GlobalKey<FormState>();
-
-  /// Used to validate the current input of the Rowing textField.
-  final _rowingFormKey = GlobalKey<FormState>();
-
-  /// Used to validate the current input of the Step Mill textField.
-  final _stepMillFormKey = GlobalKey<FormState>();
 
   /// Used to validate the current input of the Calories textField.
   final _caloriesFormKey = GlobalKey<FormState>();
@@ -56,12 +44,6 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
 
   /// Used to validate the current input of the Steps textField.
   final _stepFormKey = GlobalKey<FormState>();
-
-  /// Used to validate the current input of the Elliptical textField.
-  final _ellipticalFormKey = GlobalKey<FormState>();
-
-  /// Used to validate the current input of the Resistance/Strength textField.
-  final _resistanceStrengthFormKey = GlobalKey<FormState>();
 
   /// Serves as key for the [Scaffold] found in [build].
   final scaffoldKey = GlobalKey<ScaffoldState>();
