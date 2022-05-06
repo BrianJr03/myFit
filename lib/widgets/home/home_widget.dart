@@ -33,10 +33,7 @@ class HomeWidget extends StatefulWidget {
   /// The user's activity document stream.
   final Stream<DocumentSnapshot<Map<String, dynamic>>> activityStream;
 
-  HomeWidget(
-      {Key? key,
-      required this.goalStream,
-      required this.activityStream})
+  HomeWidget({Key? key, required this.goalStream, required this.activityStream})
       : super(key: key);
 
   @override
@@ -78,6 +75,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   /// Indicates if this screen has been disposed of.
   bool _disposed = false;
+
+  bool _isFetchingHealthData = false;
 
   @override
   void initState() {
@@ -225,6 +224,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     await HealthFactory.hasPermissions(dataTypes).then((value) async {
       if (value == null || value) {
         if (mounted) {
+          setState(() => _isFetchingHealthData = true);
           try {
             List<HealthDataType> calorieTypes = List.empty(growable: true);
             if (Platform.isIOS)
@@ -251,6 +251,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             Goal.userProgressCalGoal = cals;
             Goal.userProgressStepGoal = steps.toDouble();
             Goal.userProgressMileGoal = miles;
+            _isFetchingHealthData = false;
           });
           FireStore.updateGoalData({
             "calGoalProgress": Goal.userProgressCalGoal,
@@ -305,7 +306,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   /// Creates a urgent info (!) icon to be displayed next to an
   /// [_announcementText].
-  Column _infoIcon() {
+  Column _statsContainerIcon(IconData iconData) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -313,7 +314,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           Padding(
               padding: EdgeInsetsDirectional.all(3),
               child: Icon(
-                Icons.analytics,
+                iconData,
                 key: Key("Home.infoIcon"),
                 color: FlutterFlowTheme.secondaryColor,
                 size: 22,
@@ -321,10 +322,24 @@ class _HomeWidgetState extends State<HomeWidget> {
         ]);
   }
 
-  /// Creates a row that includes an [_infoIcon] and [_announcementText].
-  Row _announcementRow(String text) {
+  /// Creates a row that includes an [_statsContainerIcon] and [_announcementText].
+  Row _announcementRow(IconData iconData, String text) {
     return Row(
-      children: [_infoIcon(), _announcementText(text)],
+      children: [_statsContainerIcon(iconData), _announcementText(text)],
+    );
+  }
+
+  Row _syncHealthAppWarning(String dataType) {
+    return Row(
+      children: [
+        _statsContainerIcon(Icons.error),
+        AutoSizeText(
+          "Sync ${DevicePlatform.platformHealthName} to see $dataType",
+          key: Key("Home.announcementText"),
+          overflow: TextOverflow.ellipsis,
+          style: FlutterFlowTheme.bodyText1,
+        ),
+      ],
     );
   }
 
@@ -345,10 +360,16 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       shrinkWrap: true,
       children: [
-        _announcementRow("Activity Minutes: $time"),
-        _announcementRow("Cals Burned: $cals"),
-        _announcementRow("Steps Taken: $steps"),
-        _announcementRow("Miles Traveled: $miles")
+        _announcementRow(Icons.analytics, "Activity Minutes: $time"),
+        Goal.isHealthAppSynced
+            ? _announcementRow(Icons.analytics, "Cals Burned: $cals")
+            : _syncHealthAppWarning("cals"),
+        Goal.isHealthAppSynced
+            ? _announcementRow(Icons.analytics, "Steps Taken: $steps")
+            : _syncHealthAppWarning("steps"),
+        Goal.isHealthAppSynced
+            ? _announcementRow(Icons.analytics, "Miles Traveled: $miles")
+            : _syncHealthAppWarning("miles")
       ],
     );
   }
@@ -617,9 +638,14 @@ class _HomeWidgetState extends State<HomeWidget> {
             _goalTypeLabel(),
             _goalsTabbedContainer(),
             SizedBox(height: 20),
-            Goal.isHealthAppSynced
+            !_isFetchingHealthData && Goal.isHealthAppSynced
                 ? _refreshHealthData()
-                : _syncHealthAppButton(),
+                : _isFetchingHealthData && Goal.isHealthAppSynced
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [CircularProgressIndicator()],
+                      )
+                    : _syncHealthAppButton(),
             SizedBox(height: 10)
           ],
         ),
