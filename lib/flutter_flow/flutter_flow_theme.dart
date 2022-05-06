@@ -29,12 +29,15 @@ class FlutterFlowTheme {
         fontWeight: FontWeight.w600,
         fontSize: 18,
       );
-  static TextStyle get subtitle1 => TextStyle().copyWith(
-        fontFamily: 'Open Sans',
-        color: primaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-      );
+  static TextStyle subtitle1(Color color) {
+    return TextStyle().copyWith(
+      fontFamily: 'Open Sans',
+      color: color,
+      fontWeight: FontWeight.bold,
+      fontSize: 20,
+    );
+  }
+
   static TextStyle get subtitle2 => TextStyle().copyWith(
         fontFamily: 'Open Sans',
         color: primaryColor,
@@ -47,12 +50,15 @@ class FlutterFlowTheme {
         fontSize: 16,
         fontWeight: FontWeight.w500,
       );
-  static TextStyle get bodyText1 => TextStyle().copyWith(
-        fontFamily: 'Open Sans',
-        color: primaryColor,
-        fontWeight: FontWeight.normal,
-        fontSize: 18,
-      );
+  static TextStyle bodyText1(Color color) {
+    return TextStyle().copyWith(
+      fontFamily: 'Open Sans',
+      color: color,
+      fontWeight: FontWeight.normal,
+      fontSize: 18,
+    );
+  }
+
   static TextStyle get bodyText2 => TextStyle().copyWith(
         fontFamily: 'Open Sans',
         color: primaryColor,

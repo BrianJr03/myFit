@@ -190,7 +190,7 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
               maxWidth: MediaQuery.of(context).size.width * 0.75),
           child: AutoSizeText.rich(
             TextSpan(text: label, style: FlutterFlowTheme.title3Red, children: [
-              TextSpan(text: value, style: FlutterFlowTheme.bodyText1)
+              TextSpan(text: value, style: FlutterFlowTheme.bodyText1(Colors.white))
             ]),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,

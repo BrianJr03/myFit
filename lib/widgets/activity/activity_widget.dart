@@ -299,7 +299,6 @@ class _ActivityWidgetState extends State<ActivityWidget> {
           }
         },
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           key: Key("Activity.singleChildScrollView"),

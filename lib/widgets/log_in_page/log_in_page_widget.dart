@@ -137,7 +137,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
               obscureText: false,
               decoration: InputDecoration(
                 hintText: 'example@bsu.edu',
-                hintStyle: FlutterFlowTheme.bodyText1,
+                hintStyle: FlutterFlowTheme.bodyText1(Colors.white),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.black,
@@ -159,7 +159,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                   ),
                 ),
               ),
-              style: FlutterFlowTheme.bodyText1,
+              style: FlutterFlowTheme.bodyText1(Colors.white),
               textAlign: TextAlign.start,
             ),
           ),
@@ -226,7 +226,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                   ),
                 ),
               ),
-              style: FlutterFlowTheme.bodyText1,
+              style: FlutterFlowTheme.bodyText1(Colors.white),
               textAlign: TextAlign.start,
             ),
           ),
@@ -414,7 +414,6 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
             },
             child: Scaffold(
               key: scaffoldKey,
-              backgroundColor: Colors.white,
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Form(

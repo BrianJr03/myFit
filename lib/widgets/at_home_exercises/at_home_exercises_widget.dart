@@ -341,7 +341,6 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(mainAxisSize: MainAxisSize.max, children: [

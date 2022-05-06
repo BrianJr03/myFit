@@ -56,7 +56,7 @@ class _AlertWidgetState extends State<AlertWidget> {
   Text _announcementParagraph(String text) {
     return Text(
       text,
-      style: FlutterFlowTheme.bodyText1,
+      style: FlutterFlowTheme.bodyText1(Colors.white),
     );
   }
 
@@ -64,7 +64,6 @@ class _AlertWidgetState extends State<AlertWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(

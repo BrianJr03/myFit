@@ -81,7 +81,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                                 minFontSize: 20,
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.subtitle1),
+                                style: FlutterFlowTheme.subtitle1(Colors.white)),
                           )
                         ],
                       ),

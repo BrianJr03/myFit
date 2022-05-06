@@ -255,7 +255,7 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          style: FlutterFlowTheme.bodyText1,
+          style: FlutterFlowTheme.bodyText1(Colors.white),
         ),
       ),
     );
@@ -396,7 +396,6 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: Colors.white,
           body: SafeArea(
               child: SingleChildScrollView(
             child: Column(

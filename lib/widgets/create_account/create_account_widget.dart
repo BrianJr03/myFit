@@ -162,7 +162,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                 TextSpan(
                   text: 'Welcome to the myFit app.' +
                       ' Please enter the details below to create your account.',
-                  style: FlutterFlowTheme.subtitle1,
+                  style: FlutterFlowTheme.subtitle1(Colors.white),
                 ),
                 textAlign: TextAlign.center,
               ))
@@ -229,7 +229,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
           obscureText: false,
           decoration: InputDecoration(
             hintText: 'John',
-            hintStyle: FlutterFlowTheme.bodyText1,
+            hintStyle: FlutterFlowTheme.bodyText1(Colors.white),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.black,
@@ -251,7 +251,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
               ),
             ),
           ),
-          style: FlutterFlowTheme.bodyText1,
+          style: FlutterFlowTheme.bodyText1(Colors.white),
         ),
       ),
     );
@@ -312,7 +312,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
         obscureText: false,
         decoration: InputDecoration(
           hintText: 'Doe',
-          hintStyle: FlutterFlowTheme.bodyText1,
+          hintStyle: FlutterFlowTheme.bodyText1(Colors.white),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.black,
@@ -334,7 +334,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
             ),
           ),
         ),
-        style: FlutterFlowTheme.bodyText1,
+        style: FlutterFlowTheme.bodyText1(Colors.white),
       ),
     );
   }
@@ -423,7 +423,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
               obscureText: false,
               decoration: InputDecoration(
                 hintText: 'example@bsu.edu',
-                hintStyle: FlutterFlowTheme.bodyText1,
+                hintStyle: FlutterFlowTheme.bodyText1(Colors.white),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.black,
@@ -445,7 +445,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                   ),
                 ),
               ),
-              style: FlutterFlowTheme.bodyText1,
+              style: FlutterFlowTheme.bodyText1(Colors.white),
               textAlign: TextAlign.start,
             ),
           ),
@@ -553,7 +553,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                           ),
                         ],
                       ))),
-              style: FlutterFlowTheme.bodyText1,
+              style: FlutterFlowTheme.bodyText1(Colors.white),
               textAlign: TextAlign.start,
             ),
           ),
@@ -662,7 +662,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                       ],
                     )),
               ),
-              style: FlutterFlowTheme.bodyText1,
+              style: FlutterFlowTheme.bodyText1(Colors.white),
               textAlign: TextAlign.start,
             ),
           ),
@@ -827,7 +827,6 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
         },
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Form(

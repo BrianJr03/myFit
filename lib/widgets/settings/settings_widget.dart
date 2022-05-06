@@ -244,7 +244,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.tertiaryColor,
           body: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,

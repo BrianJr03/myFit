@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'APFP',
+      title: 'myFit',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -93,6 +93,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
       fadeIn: true,
     ),
   };
+
+  late bool _isLightTheme;
+  late Color _textColor;
 
   /// Serves as key for the [Scaffold] found in [build].
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -160,7 +163,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Loading myFit...", style: TextStyle(fontSize: 20)),
+              Text("Loading myFit...",
+                  style: TextStyle(fontSize: 20, color: _textColor)),
               SizedBox(height: 50),
               CircularProgressIndicator(),
             ])
@@ -170,11 +174,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
 
   /// Animated 'Welcome' text.
   SizedBox _welcomeAnimated() {
-    const colorizeColors = [
-      FlutterFlowTheme.primaryColor,
-      FlutterFlowTheme.secondaryColor,
-      FlutterFlowTheme.tertiaryColor
-    ];
+    List<Color> colorizeColors = _isLightTheme
+        ? [
+            FlutterFlowTheme.primaryColor,
+            FlutterFlowTheme.secondaryColor,
+            FlutterFlowTheme.tertiaryColor
+          ]
+        : [
+            FlutterFlowTheme.tertiaryColor,
+            FlutterFlowTheme.secondaryColor,
+            FlutterFlowTheme.tertiaryColor
+          ];
     const colorizeTextStyle = TextStyle(
       fontSize: 50.0,
       fontFamily: 'Open Sans',
@@ -201,14 +211,16 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
           TextSpan(
               text: 'This app is intended for anyone who wants a bit of fitness in their lives.' +
                   ' If you would like to do so, you can contact a developer by ',
-              style: FlutterFlowTheme.subtitle1,
+              style: FlutterFlowTheme.subtitle1(_textColor),
               children: <InlineSpan>[
                 TextSpan(
                     text: '\nclicking here.',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: FlutterFlowTheme.secondaryColor),
+                        color: _isLightTheme
+                            ? FlutterFlowTheme.secondaryColor
+                            : Colors.lightBlue),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
                         EmailContent email = EmailContent(
@@ -319,9 +331,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
 
   @override
   Widget build(BuildContext context) {
+    _isLightTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.light;
+    _textColor = _isLightTheme ? Colors.black : Colors.white;
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
       body: FutureBuilder(
           future: _initFirebaseApp(),
           builder: (context, snapshot) {
@@ -338,7 +352,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                     _createAccountButton(),
                     Text(
                         "${AppInfo.name} | v${AppInfo.version} ${kDebugMode ? "- debug" : ""}",
-                        style: FlutterFlowTheme.bodyText1)
+                        style: FlutterFlowTheme.bodyText1(_textColor))
                   ],
                 ),
               );

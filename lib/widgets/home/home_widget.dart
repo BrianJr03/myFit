@@ -298,7 +298,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               text,
               key: Key("Home.announcementText"),
               overflow: TextOverflow.ellipsis,
-              style: FlutterFlowTheme.bodyText1,
+              style: FlutterFlowTheme.bodyText1(Colors.white),
             )),
       ],
     );
@@ -337,7 +337,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           "Sync ${DevicePlatform.platformHealthName} to see $dataType",
           key: Key("Home.announcementText"),
           overflow: TextOverflow.ellipsis,
-          style: FlutterFlowTheme.bodyText1,
+          style: FlutterFlowTheme.bodyText1(Colors.white),
         ),
       ],
     );
@@ -627,7 +627,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Colors.white,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(

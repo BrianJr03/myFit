@@ -56,7 +56,7 @@ class ConfirmationDialog {
     return TextField(
         enabled: enabled,
         cursorColor: FlutterFlowTheme.secondaryColor,
-        style: FlutterFlowTheme.bodyText1,
+        style: FlutterFlowTheme.bodyText1(Colors.white),
         textAlign: TextAlign.start,
         keyboardType: kbType,
         controller: contr,

@@ -204,7 +204,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          style: FlutterFlowTheme.bodyText1,
+          style: FlutterFlowTheme.bodyText1(Colors.white),
         ),
       ),
     );
@@ -277,7 +277,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          style: FlutterFlowTheme.bodyText1,
+          style: FlutterFlowTheme.bodyText1(Colors.white),
         ),
       ),
     );
@@ -291,7 +291,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
       onChanged: (val) => setState(() => unitOfTime = val),
       width: MediaQuery.of(context).size.width * .55,
       height: 50,
-      textStyle: FlutterFlowTheme.bodyText1,
+      textStyle: FlutterFlowTheme.bodyText1(Colors.white),
       fillColor: Colors.white,
       elevation: 2,
       borderColor: FlutterFlowTheme.primaryColor,
@@ -310,7 +310,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
       onChanged: (val) => setState(() => _exerciseType = val),
       width: MediaQuery.of(context).size.width,
       height: 50,
-      textStyle: FlutterFlowTheme.bodyText1,
+      textStyle: FlutterFlowTheme.bodyText1(Colors.white),
       fillColor: Colors.white,
       elevation: 2,
       borderColor: FlutterFlowTheme.primaryColor,
@@ -341,7 +341,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
             });
           },
         ),
-        Expanded(child: Text(title, style: FlutterFlowTheme.bodyText1))
+        Expanded(child: Text(title, style: FlutterFlowTheme.bodyText1(Colors.white)))
       ],
     );
   }
@@ -390,7 +390,6 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: Colors.white,
           body: SafeArea(
               child: SingleChildScrollView(
             child: Form(

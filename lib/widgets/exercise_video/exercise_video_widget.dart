@@ -89,17 +89,17 @@ class _ExerciseVideoWidgetState extends State<ExerciseVideoWidget> {
 
   /// Sets video source (url).
   void _setVideoSource(String vSource) {
-    _videoSource = Text(vSource, style: FlutterFlowTheme.bodyText1);
+    _videoSource = Text(vSource, style: FlutterFlowTheme.bodyText1(Colors.white));
   }
 
   /// Sets description label.
   void _setDescriptionLabel(String dHeader) {
-    _descriptionLabel = Text(dHeader, style: FlutterFlowTheme.subtitle1);
+    _descriptionLabel = Text(dHeader, style: FlutterFlowTheme.subtitle1(Colors.white));
   }
 
   /// Sets video description.
   void _setDescriptionBody(String dBody) {
-    _descriptionBody = Text(dBody, style: FlutterFlowTheme.bodyText1);
+    _descriptionBody = Text(dBody, style: FlutterFlowTheme.bodyText1(Colors.white));
   }
 
   /// Player used to view YT videos.
@@ -124,7 +124,6 @@ class _ExerciseVideoWidgetState extends State<ExerciseVideoWidget> {
       },
       child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(

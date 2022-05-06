@@ -95,7 +95,7 @@ class ActivityCard {
                     children: [
                       TextSpan(
                         text: ' $type',
-                        style: FlutterFlowTheme.bodyText1,
+                        style: FlutterFlowTheme.bodyText1(Colors.white),
                       )
                     ])),
               ]),
@@ -108,7 +108,7 @@ class ActivityCard {
                       children: [
                         TextSpan(
                           text: ' $duration',
-                          style: FlutterFlowTheme.bodyText1,
+                          style: FlutterFlowTheme.bodyText1(Colors.white),
                         )
                       ])),
                 ],
@@ -116,10 +116,10 @@ class ActivityCard {
               SizedBox(width: 5),
               timestamp == importedActivityID
                   ? AutoSizeText("Logged Today",
-                      style: FlutterFlowTheme.bodyText1)
+                      style: FlutterFlowTheme.bodyText1(Colors.white))
                   : AutoSizeText.rich(TextSpan(
                       text: 'Logged at ',
-                      style: FlutterFlowTheme.bodyText1,
+                      style: FlutterFlowTheme.bodyText1(Colors.white),
                       children: [
                           TextSpan(
                             text: DateFormat.jm()
