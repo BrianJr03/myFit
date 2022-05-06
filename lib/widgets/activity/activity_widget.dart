@@ -87,8 +87,13 @@ class _ActivityWidgetState extends State<ActivityWidget> {
   void _syncAndroidHealthData(HealthFactory health) async {
     bool requested;
     if (await Permission.activityRecognition.request().isGranted) {
-      requested =
-          await health.requestAuthorization([HealthDataType.MOVE_MINUTES]);
+      requested = await health.requestAuthorization([
+        HealthDataType.MOVE_MINUTES,
+        HealthDataType.STEPS,
+        Platform.isAndroid
+            ? HealthDataType.DISTANCE_DELTA // Android
+            : HealthDataType.DISTANCE_WALKING_RUNNING,
+      ]);
       if (requested) {
         try {
           DateTime now = DateTime.now();
