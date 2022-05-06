@@ -1,6 +1,6 @@
 // Copyright 2022 The myAPFP Authors. All rights reserved.
 
-import 'package:myFit/widgets/confirmation_dialog/confirmation_dialog.dart';
+import 'package:myfit/widgets/confirmation_dialog/confirmation_dialog.dart';
 
 import '/util/validator/validator.dart';
 

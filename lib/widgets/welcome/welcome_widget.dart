@@ -1,5 +1,6 @@
 // Copyright 2022 The myAPFP Authors. All rights reserved.
 
+import '../../provider/theme_provider.dart';
 import '/main.dart';
 
 import 'dart:async';
@@ -38,7 +39,9 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('en', '')],
-      theme: ThemeData(),
+      theme: Themes.light,
+      darkTheme: Themes.dark,
+      themeMode: ThemeMode.system,
       home: WelcomeWidget(),
     );
   }

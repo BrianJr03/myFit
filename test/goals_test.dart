@@ -1,6 +1,6 @@
-import 'package:myFit/util/goals/goal.dart';
+import 'package:myfit/util/goals/goal.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:myFit/util/goals/exercise_time_goal.dart';
+import 'package:myfit/util/goals/exercise_time_goal.dart';
 
 void main() {
   group("Activity Duration String conversion tests", () {

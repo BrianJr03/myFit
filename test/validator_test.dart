@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:myFit/util/validator/validator.dart';
+import 'package:myfit/util/validator/validator.dart';
 
 void main() {
   group("Validator Class - Name Testing", () {

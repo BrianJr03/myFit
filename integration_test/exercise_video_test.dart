@@ -1,8 +1,8 @@
-import 'package:myFit/main.dart' as app;
+import 'package:myfit/main.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:myFit/flutter_flow/flutter_flow_youtube_player.dart';
+import 'package:myfit/flutter_flow/flutter_flow_youtube_player.dart';
 
 // You must be logged into the app before running these tests.
 

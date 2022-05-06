@@ -1,7 +1,7 @@
 // Copyright 2022 The myAPFP Authors. All rights reserved.
 
 import 'package:flutter/material.dart';
-import 'package:myFit/flutter_flow/flutter_flow_theme.dart';
+import 'package:myfit/flutter_flow/flutter_flow_theme.dart';
 
 class ConfirmationDialog {
   /// Shows confirmation dialog to user.
