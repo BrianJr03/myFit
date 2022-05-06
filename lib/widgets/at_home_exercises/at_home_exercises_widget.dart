@@ -2,9 +2,10 @@
 
 import 'dart:async';
 
+import '/widgets/video_card/video_card.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/util/internet_connection/internet.dart';
-import '../exercise_video/exercise_video_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -79,146 +80,15 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
           child: Row(mainAxisSize: MainAxisSize.max, children: [
             Expanded(
                 child: Text(
-                    'These are just a few of my fav songs.' + 
-                    '\n(this screen is to be deleted soon)',
+                    'These are just a few of my fav songs.' +
+                        '\n(this screen is to be deleted soon)',
                     key: Key('Exercises.description'),
                     style: FlutterFlowTheme.bodyText1))
           ]))
     ];
   }
 
-  /// Creates a video card which displays the video's info.
-  Padding _videoCard(
-      {required String author,
-      required String url,
-      required String title,
-      required Video video}) {
-    return Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
-        child: InkWell(
-            onTap: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ExerciseVideoWidget(video: video),
-                ),
-              );
-            },
-            child: Container(
-                height: MediaQuery.of(context).size.height * 0.15,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: FlutterFlowTheme.primaryColor,
-                  ),
-                ),
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: Colors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.07),
-                        ],
-                      ),
-                      Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _titleRow(title),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.005),
-                            _sourceRow(author),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.005),
-                            _videoLengthRow(video)
-                          ]),
-                    ],
-                  ),
-                ))));
-  }
-
-  /// Creates a video title row used in a [_videoCard].
-  Row _titleRow(String title) {
-    return Row(children: [
-      Container(
-          key: Key("ExerciseTitle"),
-          constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.85),
-          child: AutoSizeText(
-            title,
-            maxLines: 1,
-            key: Key("Exercises.title"),
-            style: FlutterFlowTheme.title3,
-            overflow: TextOverflow.ellipsis,
-            minFontSize: 18,
-          ))
-    ]);
-  }
-
-  /// Creates a video source row used in a [_videoCard].
-  Row _sourceRow(String author) {
-    return Row(children: [
-      Container(
-        key: Key("ExerciseDescription"),
-        constraints:
-            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.85),
-        child: AutoSizeText.rich(
-          TextSpan(
-              text: 'Source: ',
-              style: FlutterFlowTheme.title3Red,
-              children: [
-                TextSpan(text: '$author', style: FlutterFlowTheme.bodyText1)
-              ]),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          minFontSize: 14,
-        ),
-      )
-    ]);
-  }
-
-  /// Creates a video length row used in a [_videoCard].
-  Row _videoLengthRow(Video video) {
-    return Row(children: [
-      Container(
-          constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.85),
-          child: AutoSizeText.rich(
-            TextSpan(
-                text: 'Video Length: ',
-                style: FlutterFlowTheme.title3Red,
-                children: video.duration!.inMinutes > 1
-                    ? [
-                        TextSpan(
-                            text: '${video.duration!.inMinutes} minutes',
-                            style: FlutterFlowTheme.bodyText1)
-                      ]
-                    : [
-                        TextSpan(
-                            text: '${video.duration!.inSeconds} seconds',
-                            style: FlutterFlowTheme.bodyText1)
-                      ]),
-            overflow: TextOverflow.ellipsis,
-            minFontSize: 14,
-          ))
-    ]);
-  }
-
-  /// Preloads all APFP YouTube videos if the user is connected to the internet.
+  /// Preloads all YouTube videos if the user is connected to the internet.
   ///
   /// If there is no internet connection, this method will be called recursively until
   /// one is established.
@@ -273,8 +143,7 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
   void _preloadVideo(String url) async {
     YoutubeExplode yt = YoutubeExplode();
     Video video = await yt.videos.get(url);
-    Padding videoCard = _videoCard(
-        author: video.author, url: video.url, title: video.title, video: video);
+    VideoCard videoCard = VideoCard(video: video);
     _addVideoToList(videoCard);
     videoBackup.add(videoCard);
     yt.close();
@@ -285,11 +154,7 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
     YoutubeExplode yt = YoutubeExplode();
     Playlist playlist = await yt.playlists.get(id);
     await for (Video video in yt.playlists.getVideos(playlist.id)) {
-      Padding videoCard = _videoCard(
-          author: video.author,
-          url: video.url,
-          title: video.title,
-          video: video);
+      VideoCard videoCard = VideoCard(video: video);
       _addVideoToList(videoCard);
       playlistBackup.add(videoCard);
     }
@@ -297,7 +162,7 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
   }
 
   /// Adds a video card to [videoList].
-  void _addVideoToList(Padding videoCard) {
+  void _addVideoToList(VideoCard videoCard) {
     if (mounted) {
       setState(() {
         videoList.add(videoCard);
@@ -323,13 +188,13 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
                         style: FlutterFlowTheme.subtitle3)
                     : Text("Video Count: ${videoList.length}",
                         style: FlutterFlowTheme.subtitle3),
+                SizedBox(height: 10)
               ],
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
               children: videoList,
             ),
-            SizedBox(height: 10)
           ]),
         )));
   }
