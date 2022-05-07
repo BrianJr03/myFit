@@ -79,7 +79,7 @@ class _ExerciseVideoWidgetState extends State<ExerciseVideoWidget> {
           Navigator.pop(context);
         },
         child: Text('< Back to All Videos',
-            textAlign: TextAlign.start, style: FlutterFlowTheme.subtitle2(Colors.white)));
+            textAlign: TextAlign.start, style: FlutterFlowTheme.subtitle2));
   }
 
   /// Sets video title.
@@ -89,17 +89,17 @@ class _ExerciseVideoWidgetState extends State<ExerciseVideoWidget> {
 
   /// Sets video source (url).
   void _setVideoSource(String vSource) {
-    _videoSource = Text(vSource, style: FlutterFlowTheme.bodyText1(Colors.white));
+    _videoSource = Text(vSource, style: FlutterFlowTheme.bodyText1);
   }
 
   /// Sets description label.
   void _setDescriptionLabel(String dHeader) {
-    _descriptionLabel = Text(dHeader, style: FlutterFlowTheme.subtitle1(Colors.white));
+    _descriptionLabel = Text(dHeader, style: FlutterFlowTheme.subtitle1);
   }
 
   /// Sets video description.
   void _setDescriptionBody(String dBody) {
-    _descriptionBody = Text(dBody, style: FlutterFlowTheme.bodyText1(Colors.white));
+    _descriptionBody = Text(dBody, style: FlutterFlowTheme.bodyText1);
   }
 
   /// Player used to view YT videos.
@@ -124,6 +124,7 @@ class _ExerciseVideoWidgetState extends State<ExerciseVideoWidget> {
       },
       child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(

@@ -114,6 +114,7 @@ class _AlertsWidgetState extends State<AlertsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.tertiaryColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 
 class ActivityCard {
   /// Activity name.
@@ -51,10 +52,11 @@ class ActivityCard {
   void _createActivityCard() {
     _card = Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: Colors.white,
+      color: Color.alphaBlend(
+          GradientColors.februaryInk[0], GradientColors.februaryInk[1]),
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -62,8 +64,8 @@ class ActivityCard {
           Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Icon(icon,
                 color: timestamp == importedActivityID
-                    ? FlutterFlowTheme.secondaryColor
-                    : Color(0xFF54585A),
+                    ? Colors.pink[500]
+                    : FlutterFlowTheme.secondaryColor,
                 size: 80),
           ]),
           SizedBox(width: 15),
@@ -95,7 +97,7 @@ class ActivityCard {
                     children: [
                       TextSpan(
                         text: ' $type',
-                        style: FlutterFlowTheme.bodyText1(Colors.white),
+                        style: FlutterFlowTheme.bodyText1,
                       )
                     ])),
               ]),
@@ -108,7 +110,7 @@ class ActivityCard {
                       children: [
                         TextSpan(
                           text: ' $duration',
-                          style: FlutterFlowTheme.bodyText1(Colors.white),
+                          style: FlutterFlowTheme.bodyText1,
                         )
                       ])),
                 ],
@@ -116,10 +118,10 @@ class ActivityCard {
               SizedBox(width: 5),
               timestamp == importedActivityID
                   ? AutoSizeText("Logged Today",
-                      style: FlutterFlowTheme.bodyText1(Colors.white))
+                      style: FlutterFlowTheme.bodyText1)
                   : AutoSizeText.rich(TextSpan(
                       text: 'Logged at ',
-                      style: FlutterFlowTheme.bodyText1(Colors.white),
+                      style: FlutterFlowTheme.bodyText1,
                       children: [
                           TextSpan(
                             text: DateFormat.jm()
@@ -143,9 +145,8 @@ class ActivityCard {
         height: 130,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFF54585A)),
           color: Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(16),
         ),
       ),
     );

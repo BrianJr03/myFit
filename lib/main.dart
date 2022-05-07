@@ -24,6 +24,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 Future<void> main() async {
@@ -56,6 +57,9 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
 
   /// The user's activity document stream.
   late Stream<DocumentSnapshot<Map<String, dynamic>>> userActivity;
+
+  /// The [FirebaseMessaging] entry point.
+  late FirebaseMessaging messaging;
 
   /// The APFP YouTube url collection stream.
   Stream<QuerySnapshot> ytVideoStream = FireStore.getYTVideoUrls();
@@ -90,6 +94,7 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
     userActivity = _activityStream();
     _initPageList();
     _initConnectivity();
+    _initFirebaseMessaging();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     WidgetsBinding.instance!.addObserver(this);
@@ -123,6 +128,14 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
         playlistStream: ytPlaylistStream, videoStream: ytVideoStream));
     pageList.add(ActivityWidget(activityStream: userActivity));
     pageList.add(SettingsWidget());
+  }
+
+  /// Subscribes the user to necessary Firebase messaging topics.
+  void _initFirebaseMessaging() {
+    messaging = FirebaseMessaging.instance;
+    messaging.subscribeToTopic("Alerts");
+    messaging.subscribeToTopic(
+        FirebaseAuth.instance.currentUser!.displayName!.replaceAll(" ", ""));
   }
 
   /// Listens for local notification clicks.

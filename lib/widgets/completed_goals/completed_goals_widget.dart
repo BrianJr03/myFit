@@ -1,6 +1,6 @@
 // Copyright 2022 The myAPFP Authors. All rights reserved.
 
-import '/util/toasted/toasted.dart';
+import 'package:myfit/util/toasted/toasted.dart';
 
 import '/firebase/firestore.dart';
 
@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 
 class CompletedGoalsWidget extends StatefulWidget {
   CompletedGoalsWidget({
@@ -105,7 +106,7 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
         padding: EdgeInsetsDirectional.fromSTEB(15, 20, 0, 20),
         child: InkWell(
             onTap: () => Navigator.pop(context),
-            child: Text('< Go Back', style: FlutterFlowTheme.subtitle2(Colors.white))));
+            child: Text('< Go Back', style: FlutterFlowTheme.subtitle2)));
   }
 
   /// Creates a [Card] with [Padding] applied that displays
@@ -122,14 +123,11 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                width: 1,
-                color: FlutterFlowTheme.primaryColor,
-              ),
             ),
             child: Card(
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              color: Colors.white,
+              color: Color.alphaBlend(
+                  GradientColors.februaryInk[0], GradientColors.februaryInk[1]),
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -190,7 +188,7 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
               maxWidth: MediaQuery.of(context).size.width * 0.75),
           child: AutoSizeText.rich(
             TextSpan(text: label, style: FlutterFlowTheme.title3Red, children: [
-              TextSpan(text: value, style: FlutterFlowTheme.bodyText1(Colors.white))
+              TextSpan(text: value, style: FlutterFlowTheme.bodyText1)
             ]),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -275,91 +273,92 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
   /// Allows the user to chose which type of completed goals are displayed.
   GFCard _radioButtonsCard() {
     return GFCard(
+        color: FlutterFlowTheme.secondaryColor,
         content: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Column(
-          children: [
-            Text("Time"),
-            SizedBox(height: 5),
-            GFRadio(
-              type: GFRadioType.square,
-              size: 20,
-              value: 1,
-              groupValue: _groupValue,
-              onChanged: (value) {
-                setState(() {
-                  _groupValue = int.parse(value.toString());
-                });
-              },
-              inactiveIcon: null,
-              activeBorderColor: FlutterFlowTheme.secondaryColor,
-              radioColor: FlutterFlowTheme.secondaryColor,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              children: [
+                Text("Time", style: TextStyle(color: Colors.white)),
+                SizedBox(height: 5),
+                GFRadio(
+                  type: GFRadioType.square,
+                  size: 20,
+                  value: 1,
+                  groupValue: _groupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _groupValue = int.parse(value.toString());
+                    });
+                  },
+                  inactiveIcon: null,
+                  activeBorderColor: FlutterFlowTheme.secondaryColor,
+                  radioColor: FlutterFlowTheme.secondaryColor,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text("Cals", style: TextStyle(color: Colors.white)),
+                SizedBox(height: 5),
+                GFRadio(
+                  type: GFRadioType.square,
+                  size: 20,
+                  value: 2,
+                  groupValue: _groupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _groupValue = int.parse(value.toString());
+                    });
+                  },
+                  inactiveIcon: null,
+                  activeBorderColor: FlutterFlowTheme.secondaryColor,
+                  radioColor: FlutterFlowTheme.secondaryColor,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text("Steps", style: TextStyle(color: Colors.white)),
+                SizedBox(height: 5),
+                GFRadio(
+                  type: GFRadioType.square,
+                  size: 20,
+                  value: 3,
+                  groupValue: _groupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _groupValue = int.parse(value.toString());
+                    });
+                  },
+                  inactiveIcon: null,
+                  activeBorderColor: FlutterFlowTheme.secondaryColor,
+                  radioColor: FlutterFlowTheme.secondaryColor,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text("Miles", style: TextStyle(color: Colors.white)),
+                SizedBox(height: 5),
+                GFRadio(
+                  type: GFRadioType.square,
+                  size: 20,
+                  value: 4,
+                  groupValue: _groupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _groupValue = int.parse(value.toString());
+                    });
+                  },
+                  inactiveIcon: null,
+                  activeBorderColor: FlutterFlowTheme.secondaryColor,
+                  radioColor: FlutterFlowTheme.secondaryColor,
+                ),
+              ],
             ),
           ],
-        ),
-        Column(
-          children: [
-            Text("Cals"),
-            SizedBox(height: 5),
-            GFRadio(
-              type: GFRadioType.square,
-              size: 20,
-              value: 2,
-              groupValue: _groupValue,
-              onChanged: (value) {
-                setState(() {
-                  _groupValue = int.parse(value.toString());
-                });
-              },
-              inactiveIcon: null,
-              activeBorderColor: FlutterFlowTheme.secondaryColor,
-              radioColor: FlutterFlowTheme.secondaryColor,
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Text("Steps"),
-            SizedBox(height: 5),
-            GFRadio(
-              type: GFRadioType.square,
-              size: 20,
-              value: 3,
-              groupValue: _groupValue,
-              onChanged: (value) {
-                setState(() {
-                  _groupValue = int.parse(value.toString());
-                });
-              },
-              inactiveIcon: null,
-              activeBorderColor: FlutterFlowTheme.secondaryColor,
-              radioColor: FlutterFlowTheme.secondaryColor,
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Text("Miles"),
-            SizedBox(height: 5),
-            GFRadio(
-              type: GFRadioType.square,
-              size: 20,
-              value: 4,
-              groupValue: _groupValue,
-              onChanged: (value) {
-                setState(() {
-                  _groupValue = int.parse(value.toString());
-                });
-              },
-              inactiveIcon: null,
-              activeBorderColor: FlutterFlowTheme.secondaryColor,
-              radioColor: FlutterFlowTheme.secondaryColor,
-            ),
-          ],
-        ),
-      ],
-    ));
+        ));
   }
 
   @override

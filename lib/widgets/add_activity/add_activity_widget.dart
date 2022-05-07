@@ -146,7 +146,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
   InkWell _goBackButton() {
     return InkWell(
         onTap: () => Navigator.pop(context),
-        child: Text('< Go Back', style: FlutterFlowTheme.subtitle2(Colors.white)));
+        child: Text('< Go Back', style: FlutterFlowTheme.subtitle2));
   }
 
   /// Returns true if there are no 'Effective Activities' radio buttons selected.
@@ -204,7 +204,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          style: FlutterFlowTheme.bodyText1(Colors.white),
+          style: FlutterFlowTheme.bodyText1,
         ),
       ),
     );
@@ -277,7 +277,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          style: FlutterFlowTheme.bodyText1(Colors.white),
+          style: FlutterFlowTheme.bodyText1,
         ),
       ),
     );
@@ -291,7 +291,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
       onChanged: (val) => setState(() => unitOfTime = val),
       width: MediaQuery.of(context).size.width * .55,
       height: 50,
-      textStyle: FlutterFlowTheme.bodyText1(Colors.white),
+      textStyle: FlutterFlowTheme.bodyText1,
       fillColor: Colors.white,
       elevation: 2,
       borderColor: FlutterFlowTheme.primaryColor,
@@ -310,7 +310,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
       onChanged: (val) => setState(() => _exerciseType = val),
       width: MediaQuery.of(context).size.width,
       height: 50,
-      textStyle: FlutterFlowTheme.bodyText1(Colors.white),
+      textStyle: FlutterFlowTheme.bodyText1,
       fillColor: Colors.white,
       elevation: 2,
       borderColor: FlutterFlowTheme.primaryColor,
@@ -341,7 +341,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
             });
           },
         ),
-        Expanded(child: Text(title, style: FlutterFlowTheme.bodyText1(Colors.white)))
+        Expanded(child: Text(title, style: FlutterFlowTheme.bodyText1))
       ],
     );
   }
@@ -390,6 +390,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: Colors.white,
           body: SafeArea(
               child: SingleChildScrollView(
             child: Form(

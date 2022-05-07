@@ -21,6 +21,7 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -39,7 +40,7 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
                       ),
                     );
                   },
-                  child: Text('< Back', style: FlutterFlowTheme.subtitle2(Colors.white)),
+                  child: Text('< Back', style: FlutterFlowTheme.subtitle2),
                 ),
               ),
               Padding(
@@ -53,7 +54,7 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
                     'Activity information from fitness trackers can be imported to myAPFP via the Refresh icon on the Activity page. If permissions are initially denied, ${DevicePlatform.platformHealthName} can be synchronized to the app using your system settings.\n\n' +
                         'This will allow you to connect a linked activity tracker, such as Fitbit, to the myAPFP app.\n\n' +
                        DevicePlatform.settingsPath,
-                    style: FlutterFlowTheme.bodyText1(Colors.white)),
+                    style: FlutterFlowTheme.bodyText1),
               ),
               Align(
                 alignment: AlignmentDirectional(0.05, 0),
@@ -67,7 +68,7 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                 child: Text(
                     'From here, choose whether you allow or  don\'t allow myAPFP to access your physical activity data.',
-                    style: FlutterFlowTheme.bodyText1(Colors.white)),
+                    style: FlutterFlowTheme.bodyText1),
               ),
               SizedBox(height: 5)
             ],

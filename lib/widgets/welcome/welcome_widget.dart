@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'myFit',
+      title: 'APFP',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: const [Locale('en', '')],
       theme: Themes.light,
-      // darkTheme: Themes.dark,
-      // themeMode: ThemeMode.system,
+      darkTheme: Themes.dark,
+      themeMode: ThemeMode.system,
       home: WelcomeWidget(),
     );
   }
@@ -93,9 +93,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
       fadeIn: true,
     ),
   };
-
-  late bool _isLightTheme;
-  late Color _textColor;
 
   /// Serves as key for the [Scaffold] found in [build].
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -163,8 +160,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Loading myFit...",
-                  style: TextStyle(fontSize: 20, color: _textColor)),
+              Text("Loading myFit...", style: TextStyle(fontSize: 20)),
               SizedBox(height: 50),
               CircularProgressIndicator(),
             ])
@@ -174,17 +170,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
 
   /// Animated 'Welcome' text.
   SizedBox _welcomeAnimated() {
-    List<Color> colorizeColors = _isLightTheme
-        ? [
-            FlutterFlowTheme.primaryColor,
-            FlutterFlowTheme.secondaryColor,
-            FlutterFlowTheme.tertiaryColor
-          ]
-        : [
-            FlutterFlowTheme.tertiaryColor,
-            FlutterFlowTheme.secondaryColor,
-            FlutterFlowTheme.tertiaryColor
-          ];
+    const colorizeColors = [
+      FlutterFlowTheme.primaryColor,
+      FlutterFlowTheme.secondaryColor,
+      FlutterFlowTheme.tertiaryColor
+    ];
     const colorizeTextStyle = TextStyle(
       fontSize: 50.0,
       fontFamily: 'Open Sans',
@@ -211,16 +201,14 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
           TextSpan(
               text: 'This app is intended for anyone who wants a bit of fitness in their lives.' +
                   ' If you would like to do so, you can contact a developer by ',
-              style: FlutterFlowTheme.subtitle1(_textColor),
+              style: FlutterFlowTheme.subtitle1,
               children: <InlineSpan>[
                 TextSpan(
                     text: '\nclicking here.',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: _isLightTheme
-                            ? FlutterFlowTheme.secondaryColor
-                            : Colors.lightBlue),
+                        color: FlutterFlowTheme.secondaryColor),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
                         EmailContent email = EmailContent(
@@ -331,11 +319,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
 
   @override
   Widget build(BuildContext context) {
-    _isLightTheme =
-        MediaQuery.of(context).platformBrightness == Brightness.light;
-    _textColor = _isLightTheme ? Colors.black : Colors.white;
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.white,
       body: FutureBuilder(
           future: _initFirebaseApp(),
           builder: (context, snapshot) {
@@ -352,7 +338,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                     _createAccountButton(),
                     Text(
                         "${AppInfo.name} | v${AppInfo.version} ${kDebugMode ? "- debug" : ""}",
-                        style: FlutterFlowTheme.bodyText1(_textColor))
+                        style: FlutterFlowTheme.bodyText1)
                   ],
                 ),
               );

@@ -112,7 +112,7 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
     return InkWell(
         key: Key("SetGoal.goBackBTN"),
         onTap: () => Navigator.pop(context),
-        child: Text('< Go Back', style: FlutterFlowTheme.subtitle2(Colors.white)));
+        child: Text('< Go Back', style: FlutterFlowTheme.subtitle2));
   }
 
   /// Creates a button that allows a user to set a goal.
@@ -255,7 +255,7 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          style: FlutterFlowTheme.bodyText1(Colors.white),
+          style: FlutterFlowTheme.bodyText1,
         ),
       ),
     );
@@ -396,6 +396,7 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: Colors.white,
           body: SafeArea(
               child: SingleChildScrollView(
             child: Column(

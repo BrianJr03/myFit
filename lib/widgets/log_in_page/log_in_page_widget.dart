@@ -106,7 +106,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
           onTap: () async {
             WelcomeWidget.returnToWelcome(context);
           },
-          child: Text('< Back', style: FlutterFlowTheme.subtitle2(Colors.white)),
+          child: Text('< Back', style: FlutterFlowTheme.subtitle2),
         ),
       )
     ]);
@@ -137,7 +137,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
               obscureText: false,
               decoration: InputDecoration(
                 hintText: 'example@bsu.edu',
-                hintStyle: FlutterFlowTheme.bodyText1(Colors.white),
+                hintStyle: FlutterFlowTheme.bodyText1,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.black,
@@ -159,7 +159,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                   ),
                 ),
               ),
-              style: FlutterFlowTheme.bodyText1(Colors.white),
+              style: FlutterFlowTheme.bodyText1,
               textAlign: TextAlign.start,
             ),
           ),
@@ -226,7 +226,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                   ),
                 ),
               ),
-              style: FlutterFlowTheme.bodyText1(Colors.white),
+              style: FlutterFlowTheme.bodyText1,
               textAlign: TextAlign.start,
             ),
           ),
@@ -414,6 +414,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
             },
             child: Scaffold(
               key: scaffoldKey,
+              backgroundColor: Colors.white,
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Form(

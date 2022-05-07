@@ -263,8 +263,8 @@ class _HomeWidgetState extends State<HomeWidget> {
     });
   }
 
-  /// Label used above the [_recentAnnouncementGrid].
-  Padding _recentAnnouncementsLabel() {
+  /// Label used above the [_statsGrid].
+  Padding _statsLabel() {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
       child: Row(
@@ -285,7 +285,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
   }
 
-  /// Creates text to be displayed in the [_recentAnnouncementGrid].
+  /// Creates text to be displayed in the [_statsGrid].
   Column _announcementText(String text) {
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -298,7 +298,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               text,
               key: Key("Home.announcementText"),
               overflow: TextOverflow.ellipsis,
-              style: FlutterFlowTheme.bodyText1(Colors.white),
+              style: FlutterFlowTheme.bodyText1,
             )),
       ],
     );
@@ -337,14 +337,14 @@ class _HomeWidgetState extends State<HomeWidget> {
           "Sync ${DevicePlatform.platformHealthName} to see $dataType",
           key: Key("Home.announcementText"),
           overflow: TextOverflow.ellipsis,
-          style: FlutterFlowTheme.bodyText1(Colors.white),
+          style: FlutterFlowTheme.bodyText1,
         ),
       ],
     );
   }
 
   /// Creates GridView to display recent announcements.
-  GridView _recentAnnouncementGrid() {
+  GridView _statsGrid() {
     var formatter = NumberFormat("###,###", "en_US");
     var time = Goal.userProgressExerciseTime;
     var cals = formatter.format(Goal.userProgressCalGoal);
@@ -374,19 +374,19 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
   }
 
-  /// Wraps the [_recentAnnouncementGrid], and provides border decoration.
-  Container _announcements() {
+  /// Wraps the [_statsGrid], and provides border decoration.
+  Container _stats() {
     return Container(
-      key: Key('Home.announcements'),
+      key: Key('Home.stats'),
       width: MediaQuery.of(context).size.width * 0.9,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
-          color: Color(0xFFBDBDBD),
+          color: Colors.black,
           width: 2,
         ),
       ),
-      child: _recentAnnouncementGrid(),
+      child: _statsGrid(),
     );
   }
 
@@ -552,7 +552,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           color: Colors.white,
           shape: BoxShape.rectangle,
           border: Border.all(
-            color: Color(0xFFBDBDBD),
+            color: Colors.black,
             width: 2,
           ),
         ),
@@ -627,13 +627,14 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            _recentAnnouncementsLabel(),
-            _announcements(),
+            _statsLabel(),
+            _stats(),
             _goalTypeLabel(),
             _goalsTabbedContainer(),
             SizedBox(height: 20),

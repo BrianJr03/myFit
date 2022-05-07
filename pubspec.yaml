@@ -55,6 +55,7 @@ dependencies:
   modjs_video_player: ^1.0.0+fix
   getwidget: ^2.0.5
   package_info_plus: ^1.4.2
+  flutter_gradient_colors: ^2.1.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.9.1

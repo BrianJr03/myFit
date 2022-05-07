@@ -202,23 +202,26 @@ class _ActivityWidgetState extends State<ActivityWidget> {
             ),
           )
         ]),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            InkWell(
-              onTap: _syncHealthAppData,
-              child: Icon(
-                Icons.refresh,
-                color: FlutterFlowTheme.secondaryColor,
+        Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(10, 16, 10, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              InkWell(
+                onTap: _syncHealthAppData,
+                child: Icon(
+                  Icons.refresh,
+                  color: FlutterFlowTheme.secondaryColor,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         Column(
           children: [
             Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(10, 16, 10, 0),
                 child: InkWell(
                     onTap: () {
                       Navigator.push(
@@ -299,6 +302,7 @@ class _ActivityWidgetState extends State<ActivityWidget> {
           }
         },
       ),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           key: Key("Activity.singleChildScrollView"),

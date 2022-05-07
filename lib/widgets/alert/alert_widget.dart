@@ -40,7 +40,7 @@ class _AlertWidgetState extends State<AlertWidget> {
           ),
         );
       },
-      child: Text('< Back to Announcements', style: FlutterFlowTheme.subtitle2(Colors.white)),
+      child: Text('< Back to Announcements', style: FlutterFlowTheme.subtitle2),
     );
   }
 
@@ -56,7 +56,7 @@ class _AlertWidgetState extends State<AlertWidget> {
   Text _announcementParagraph(String text) {
     return Text(
       text,
-      style: FlutterFlowTheme.bodyText1(Colors.white),
+      style: FlutterFlowTheme.bodyText1,
     );
   }
 
@@ -64,6 +64,7 @@ class _AlertWidgetState extends State<AlertWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(

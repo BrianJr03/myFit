@@ -198,6 +198,7 @@ class _EmailNotConfirmedWidgetState extends State<EmailNotConfirmedWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.tertiaryColor,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
