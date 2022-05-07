@@ -69,6 +69,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
   /// within the 'registered-users' collection upon successful account creation.
   late String _docID;
 
+  late bool _isLightTheme;
+  late Color _textColor;
+
   @override
   void initState() {
     super.initState();
@@ -134,7 +137,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
               },
               child: Text(
                 '< Back',
-                style: FlutterFlowTheme.subtitle2,
+                style: FlutterFlowTheme.subtitle2(_textColor),
               ),
             ),
           ),
@@ -162,7 +165,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                 TextSpan(
                   text: 'Welcome to the myFit app.' +
                       ' Please enter the details below to create your account.',
-                  style: FlutterFlowTheme.subtitle1(Colors.white),
+                  style: FlutterFlowTheme.subtitle1(_textColor),
                 ),
                 textAlign: TextAlign.center,
               ))
@@ -818,6 +821,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
 
   @override
   Widget build(BuildContext context) {
+    _isLightTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.light;
+    _textColor = _isLightTheme ? Colors.black : Colors.white;
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: WillPopScope(

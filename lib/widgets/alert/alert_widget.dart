@@ -40,7 +40,7 @@ class _AlertWidgetState extends State<AlertWidget> {
           ),
         );
       },
-      child: Text('< Back to Announcements', style: FlutterFlowTheme.subtitle2),
+      child: Text('< Back to Announcements', style: FlutterFlowTheme.subtitle2(Colors.white)),
     );
   }
 

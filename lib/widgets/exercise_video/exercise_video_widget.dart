@@ -79,7 +79,7 @@ class _ExerciseVideoWidgetState extends State<ExerciseVideoWidget> {
           Navigator.pop(context);
         },
         child: Text('< Back to All Videos',
-            textAlign: TextAlign.start, style: FlutterFlowTheme.subtitle2));
+            textAlign: TextAlign.start, style: FlutterFlowTheme.subtitle2(Colors.white)));
   }
 
   /// Sets video title.

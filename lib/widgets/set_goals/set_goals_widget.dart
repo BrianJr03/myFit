@@ -112,7 +112,7 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
     return InkWell(
         key: Key("SetGoal.goBackBTN"),
         onTap: () => Navigator.pop(context),
-        child: Text('< Go Back', style: FlutterFlowTheme.subtitle2));
+        child: Text('< Go Back', style: FlutterFlowTheme.subtitle2(Colors.white)));
   }
 
   /// Creates a button that allows a user to set a goal.

@@ -39,7 +39,7 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
                       ),
                     );
                   },
-                  child: Text('< Back', style: FlutterFlowTheme.subtitle2),
+                  child: Text('< Back', style: FlutterFlowTheme.subtitle2(Colors.white)),
                 ),
               ),
               Padding(

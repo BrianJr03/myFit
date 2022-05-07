@@ -106,7 +106,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
           onTap: () async {
             WelcomeWidget.returnToWelcome(context);
           },
-          child: Text('< Back', style: FlutterFlowTheme.subtitle2),
+          child: Text('< Back', style: FlutterFlowTheme.subtitle2(Colors.white)),
         ),
       )
     ]);

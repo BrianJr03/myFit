@@ -105,7 +105,7 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
         padding: EdgeInsetsDirectional.fromSTEB(15, 20, 0, 20),
         child: InkWell(
             onTap: () => Navigator.pop(context),
-            child: Text('< Go Back', style: FlutterFlowTheme.subtitle2)));
+            child: Text('< Go Back', style: FlutterFlowTheme.subtitle2(Colors.white))));
   }
 
   /// Creates a [Card] with [Padding] applied that displays

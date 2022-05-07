@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: const [Locale('en', '')],
       theme: Themes.light,
-      darkTheme: Themes.dark,
-      themeMode: ThemeMode.system,
+      // darkTheme: Themes.dark,
+      // themeMode: ThemeMode.system,
       home: WelcomeWidget(),
     );
   }

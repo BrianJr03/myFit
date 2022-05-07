@@ -4,7 +4,6 @@ class FlutterFlowTheme {
   static const Color primaryColor = Color(0xFF000000);
   static const Color secondaryColor = Color(0xFF1434A4);
   static const Color tertiaryColor = Color(0xFFFFFFFF);
-
   static TextStyle get title1 => TextStyle().copyWith(
         fontFamily: 'Open Sans',
         color: primaryColor,
@@ -37,13 +36,14 @@ class FlutterFlowTheme {
       fontSize: 20,
     );
   }
-
-  static TextStyle get subtitle2 => TextStyle().copyWith(
-        fontFamily: 'Open Sans',
-        color: primaryColor,
-        fontWeight: FontWeight.w600,
-        fontSize: 22,
-      );
+  static TextStyle subtitle2(Color color) {
+    return TextStyle().copyWith(
+      fontFamily: 'Open Sans',
+      color: color,
+      fontWeight: FontWeight.w600,
+      fontSize: 22,
+    );
+  }
   static TextStyle get subtitle3 => TextStyle().copyWith(
         fontFamily: 'Open Sans',
         color: FlutterFlowTheme.primaryColor,
@@ -58,14 +58,12 @@ class FlutterFlowTheme {
       fontSize: 18,
     );
   }
-
   static TextStyle get bodyText2 => TextStyle().copyWith(
         fontFamily: 'Open Sans',
         color: primaryColor,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
-
   static Color dayToColor(String dayNum) {
     var color = primaryColor;
     switch (int.parse(dayNum)) {

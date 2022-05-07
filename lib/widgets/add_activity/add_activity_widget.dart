@@ -146,7 +146,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
   InkWell _goBackButton() {
     return InkWell(
         onTap: () => Navigator.pop(context),
-        child: Text('< Go Back', style: FlutterFlowTheme.subtitle2));
+        child: Text('< Go Back', style: FlutterFlowTheme.subtitle2(Colors.white)));
   }
 
   /// Returns true if there are no 'Effective Activities' radio buttons selected.
