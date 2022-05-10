@@ -4,10 +4,10 @@ import 'package:rxdart/rxdart.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
-  /// Provides cross-platform functionality for displaying local notifications.
   static FlutterLocalNotificationsPlugin _notifications =
       FlutterLocalNotificationsPlugin();
 
+  /// Provides cross-platform functionality for displaying local notifications.
   static FlutterLocalNotificationsPlugin get notifications => _notifications;
 
   /// Creates a stream which payloads are stored once a user clicks on
