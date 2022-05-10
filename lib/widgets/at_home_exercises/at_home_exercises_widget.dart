@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import 'dart:async';
 
@@ -15,10 +15,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class AtHomeExercisesWidget extends StatefulWidget {
-  /// The APFP YouTube url collection stream.
+  /// The YouTube url collection stream.
   final Stream<QuerySnapshot<Object?>> videoStream;
 
-  /// The APFP YouTube playlist id collection stream.
+  /// The YouTube playlist id collection stream.
   final Stream<QuerySnapshot<Object?>> playlistStream;
 
   AtHomeExercisesWidget(
@@ -36,10 +36,10 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
   /// Returns true if all YouTube videos are loaded.
   bool _isVideosLoaded = false;
 
-  /// Backup of APFP YouTube video urls.
+  /// Backup of YouTube video urls.
   List<Widget> _videoBackup = [];
 
-  /// Backup of APFP YouTube playlist ids.
+  /// Backup of YouTube playlist ids.
   List<Widget> _playlistBackup = [];
 
   /// A list of exercise YouTube videos.
@@ -218,10 +218,9 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
     return _videoList;
   }
 
-  /// A [GFCard] containing 'Time', 'Cals', 'Steps', 'Miles'
-  /// and 'APFP' radio buttons.
+  /// A [GFCard] containing 'All', 'Aerobic', 'Muscular', 'Cardio', & 'Balance'.
   ///
-  /// Allows the user to chose which type of completed goals are displayed.
+  /// Allows the user to chose which type of videos are displayed.
   GFCard _radioButtonsCard() {
     return GFCard(
         color: FlutterFlowTheme.secondaryColor,

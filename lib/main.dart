@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import 'dart:async';
 import 'dart:developer' as developer;
@@ -61,10 +61,10 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
   /// The [FirebaseMessaging] entry point.
   late FirebaseMessaging messaging;
 
-  /// The APFP YouTube url collection stream.
+  /// The YouTube url collection stream.
   Stream<QuerySnapshot> ytVideoStream = FireStore.getYTVideoUrls();
 
-  /// The APFP YouTube playlist id collection stream.
+  /// The YouTube playlist id collection stream.
   Stream<QuerySnapshot> ytPlaylistStream = FireStore.getYTPlaylistIDs();
 
   /// A list of pages to be used in the Nav bar.

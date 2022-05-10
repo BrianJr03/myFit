@@ -12,8 +12,7 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String duration = video.duration.toString();
-    duration = duration.substring(0, 7);
+    String duration = video.duration.toString()..substring(0, 7);
     if (video.duration!.inMinutes < 59) {
       duration = duration.substring(2, 7);
     }

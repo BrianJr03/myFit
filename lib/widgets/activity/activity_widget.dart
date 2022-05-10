@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import 'dart:io';
 
@@ -56,7 +56,7 @@ class _ActivityWidgetState extends State<ActivityWidget> {
     _collectActivity();
   }
 
-  /// Synchronizes iOS Health App data with myAPFP.
+  /// Synchronizes iOS Health App data with myFit.
   void _syncIOSHealthData(HealthFactory health) async {
     await health.requestAuthorization([
       HealthDataType.WORKOUT,
@@ -83,7 +83,7 @@ class _ActivityWidgetState extends State<ActivityWidget> {
     });
   }
 
-  /// Synchronizes Android Health App data with myAPFP.
+  /// Synchronizes Android Health App data with myFit.
   void _syncAndroidHealthData(HealthFactory health) async {
     bool requested;
     if (await Permission.activityRecognition.request().isGranted) {
@@ -115,7 +115,7 @@ class _ActivityWidgetState extends State<ActivityWidget> {
     }
   }
 
-  /// Synchronizes Health App data with myAPFP based on current platform.
+  /// Synchronizes Health App data with myFit based on current platform.
   void _syncHealthAppData() async {
     final health = HealthFactory();
     if (Platform.isIOS) {
@@ -274,7 +274,7 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                   'Activity: ${cardInfo[1].replaceAll(RegExp('-'), ' ')}\n' +
                   'Exercise Type: ${cardInfo[2]}\n' +
                   'Duration: ${cardInfo[3]} ${cardInfo[4]}\n' +
-                  '\nSent from the myAPFP App.');
+                  '\nSent from the myFit App.');
           image = null;
           Navigator.pop(context);
         },
@@ -341,7 +341,7 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                                               'Activity: ${cardInfo[1].replaceAll(RegExp('-'), ' ')}\n' +
                                               'Exercise Type: ${cardInfo[2]}\n' +
                                               'Duration: ${cardInfo[3] + ' ' + cardInfo[4]}\n' +
-                                              '\nSent from the myAPFP App.');
+                                              '\nSent from the myFit App.');
                                     }),
                                 FocusedMenuItem(
                                     title: Text("+ Image/Share"),

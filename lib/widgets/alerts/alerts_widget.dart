@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import '../alert/alert_widget.dart';
 import '/components/announcement_widget.dart';

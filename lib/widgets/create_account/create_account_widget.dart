@@ -1,13 +1,10 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
-import '/firebase/firestore.dart';
 import '/firebase/fire_auth.dart';
 
 import '/util/toasted/toasted.dart';
 import '/util/validator/validator.dart';
-import '/util/internet_connection/internet.dart';
 
-import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 
@@ -19,7 +16,6 @@ import '../successful_registration/successful_registration_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreateAccountWidget extends StatefulWidget {
   CreateAccountWidget({Key? key}) : super(key: key);
@@ -60,14 +56,6 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
   ///
   /// Used to validate the current state of the [Form].
   final _formKey = GlobalKey<FormState>();
-
-  /// Stores the id of the document associated with the user in the
-  /// 'registered-users' Firestore collection.
-  ///
-  /// This variable will be assigned a value if a user provides valid APFP credentials
-  /// and is later used to add a user's uid to their associated document
-  /// within the 'registered-users' collection upon successful account creation.
-  late String _docID;
 
   @override
   void initState() {
@@ -718,34 +706,6 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
         onSubmitTap: () => Navigator.pop(context, 'OK'));
   }
 
-  /// Used to verify a user's APFP membership status.
-  ///
-  /// If the email
-  /// they're attempting to sign up with is not found in the 'registered users'
-  /// collection,
-  ///
-  /// account creation will be prohibited.
-  void _verifyAPFPCredentials() async {
-    if (await Internet.isConnected()) {
-      if (_formKey.currentState!.validate()) {
-        Toasted.showToast("Verifying Membership...");
-        FireStore.getRegisteredUser(_getEmail())
-            .then((QuerySnapshot querySnapshot) {
-          if (querySnapshot.size != 0) {
-            // Only works if there is uniqueness amongst
-            // all email fields in 'registered users' firestore collection
-            _docID = querySnapshot.docs.first.id;
-            _createAccount();
-          } else {
-            Toasted.showToast(
-                "You must be a member of the APFP to use this app.");
-          }
-        });
-      }
-    } else
-      showSnackbar(context, "Please check your Internet connection");
-  }
-
   /// Used to create a user's account based on their provided credentials.
   ///
   /// The user's UID is also uploaded to Firestore when the account is created.
@@ -756,7 +716,6 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
     user?.sendEmailVerification();
     if (user != null) {
       await user.reload();
-      FireStore.storeUID(_docID, user.uid);
       if (user.emailVerified) {
         Toasted.showToast("Account has been verified. Please sign in.");
       } else {
@@ -795,7 +754,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
           FFButtonWidget(
             key: Key("Create.createAcctButton"),
             onPressed: () async {
-              _verifyAPFPCredentials();
+              _createAccount();
             },
             text: 'Create Account',
             options: FFButtonOptions(

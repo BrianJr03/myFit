@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import '../../util/platform/device_platform.dart';
 import '/main.dart';
@@ -51,8 +51,8 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 30, 20, 0),
                 child: Text(
-                    'Activity information from fitness trackers can be imported to myAPFP via the Refresh icon on the Activity page. If permissions are initially denied, ${DevicePlatform.platformHealthName} can be synchronized to the app using your system settings.\n\n' +
-                        'This will allow you to connect a linked activity tracker, such as Fitbit, to the myAPFP app.\n\n' +
+                    'Activity information from fitness trackers can be imported to myFit via the Refresh icon on the Activity page. If permissions are initially denied, ${DevicePlatform.platformHealthName} can be synchronized to the app using your system settings.\n\n' +
+                        'This will allow you to connect a linked activity tracker, such as Fitbit, to the myFit app.\n\n' +
                        DevicePlatform.settingsPath,
                     style: FlutterFlowTheme.bodyText1),
               ),
@@ -67,7 +67,7 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                 child: Text(
-                    'From here, choose whether you allow or  don\'t allow myAPFP to access your physical activity data.',
+                    'From here, choose whether you allow or  don\'t allow myFit to access your physical activity data.',
                     style: FlutterFlowTheme.bodyText1),
               ),
               SizedBox(height: 5)

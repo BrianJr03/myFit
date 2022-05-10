@@ -1,5 +1,5 @@
-# myAPFP
-myAPFP is an application created for members of the Adult Physical Fitness Program at Ball State University. Members will be able to view announcements sent by administrators of the APFP, access at-home exercise videos, and log activity that can be shared with administrators, all in one easy-to-use application. 
+# myFit
+myFit is an app that is intended for anyone looking for a bit of fitness in their lives. 
 
 ## How to Run
 This application is in development and may be prone to bugs/issues/crashes. Run application at own risk.
@@ -19,7 +19,7 @@ As a hybrid application, this project uses multiple SDKs and external APIs. Vers
   ### [Flutter](https://flutter.dev/)
   - Flutter is an open source framework by Google for building beautiful, natively compiled, multi-platform applications from a single codebase.
   - Application tested using Flutter SDK version `2.10.4` at time of writing.
-  - Flutter is powered by **Dart**, which provides the language and runtimes that power Flutter apps. Application tested using Dart version `2.10.4` at time of writing.
+  - Flutter is powered by **Dart**, which provides the language and runtime that power Flutter apps. Application tested using Dart version `2.10.4` at time of writing.
 
   ### [Firebase](https://firebase.google.com/) and [Firestore](https://firebase.google.com/docs/firestore)
   - Firebase is a Google platform to assist with developing mobile and web applications. It can help to serve as a back end for applications without the requirement of managing servers.
@@ -49,7 +49,7 @@ An example of a method that *returns an identifiable Flutter widget*:
 InkWell _goBackToAllVideos() {
     return InkWell(
         onTap: () async {
-          _lockPortait();
+          _lockPortrait();
           Navigator.pop(context);
         },
         child: Text('< Back to All Videos',

@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import 'package:myfit/util/toasted/toasted.dart';
 
@@ -206,7 +206,7 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
   }
 
   /// Returns true if the [_timeGoals], [_calGoals],
-  ///  [_stepGoals], [_mileGoals] & [_apfpGoals] lists are empty.
+  ///  [_stepGoals], & [_mileGoals] lists are empty.
   bool isAllGoalListsEmpty() {
     return _timeGoals.isEmpty &&
         _calGoals.isEmpty &&
@@ -267,9 +267,8 @@ class _CompletedGoalsWidgetState extends State<CompletedGoalsWidget> {
     return _timeGoals;
   }
 
-  /// A [GFCard] containing 'Time', 'Cals', 'Steps', 'Miles'
-  /// and 'APFP' radio buttons.
-  ///
+  /// A [GFCard] containing 'Time', 'Cals', 'Steps', 'Miles'.
+  /// 
   /// Allows the user to chose which type of completed goals are displayed.
   GFCard _radioButtonsCard() {
     return GFCard(

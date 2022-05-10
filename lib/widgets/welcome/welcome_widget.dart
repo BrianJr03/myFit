@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import '../../provider/theme_provider.dart';
 import '/main.dart';
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'APFP',
+      title: 'myFit',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -138,8 +138,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
     return user.emailVerified;
   }
 
-  /// Returns APFP logo.
-  Widget _apfpLogo() {
+  /// Returns myFit logo.
+  Widget _myfitLogo() {
     return Image.asset(
       'assets/images/running_logo_2.png',
       width: 100,
@@ -193,7 +193,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
     );
   }
 
-  /// Text shown detailing how to contact an APFP admin.
+  /// Text shown detailing how to contact a dev.
   Padding _contactAdminText() {
     return Padding(
         padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
@@ -331,7 +331,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _apfpLogo(),
+                    _myfitLogo(),
                     _welcomeAnimated(),
                     _contactAdminText(),
                     _logInButton(),

@@ -1,6 +1,5 @@
 import 'package:myfit/util/goals/goal.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:myfit/util/goals/exercise_time_goal.dart';
 
 void main() {
   group("Activity Duration String conversion tests", () {
@@ -38,19 +37,19 @@ void main() {
       var activitySnapShot = {
         DateTime.now().toIso8601String(): ["Cycling", "Aerobic", "30 seconds"]
       };
-      expect(ExerciseGoal.totalTimeInMinutes(activitySnapShot), 0.5);
+      expect(Goal.totalTimeInMinutes(activitySnapShot), 0.5);
     });
     test('Calculate total minutes exercised from an activity snapshot (minutes).', () {
       var activitySnapShot = {
         DateTime.now().toIso8601String(): ["Cycling", "Aerobic", "35 minutes"]
       };
-      expect(ExerciseGoal.totalTimeInMinutes(activitySnapShot), 35);
+      expect(Goal.totalTimeInMinutes(activitySnapShot), 35);
     });
     test('Calculate total minutes exercised from an activity snapshot (hours).', () {
       var activitySnapShot = {
         DateTime.now().toIso8601String(): ["Cycling", "Aerobic", "2 hours"]
       };
-      expect(ExerciseGoal.totalTimeInMinutes(activitySnapShot), 120);
+      expect(Goal.totalTimeInMinutes(activitySnapShot), 120);
     });
   });
 }

@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import '/util/toasted/toasted.dart';
 import '/util/validator/validator.dart';
@@ -261,8 +261,7 @@ class _SetGoalsWidgetState extends State<SetGoalsWidget> {
     );
   }
 
-  /// Based on [_isAPFPGoalsDisplayed], this will return a list of widgets
-  /// associated with daily regular goals or 'APFP' goals.
+  /// Returns a list of widgets associated with daily goals.
   List<Widget> _dailyGoalsUI() {
     return [
       Padding(

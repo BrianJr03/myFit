@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import 'dart:io';
 
@@ -55,7 +55,7 @@ class HPGraphic {
   /// [percent] must be between 0.0 and 1.0.
   ///
   /// If [isHealthAppSynced] is set to false, the goal within view
-  /// cannot be set until a user synchronizes a health app to myAPFP.
+  /// cannot be set until a user synchronizes a health app to myFit.
   static InkWell createView(
       {required Key key,
       required BuildContext context,
@@ -70,8 +70,8 @@ class HPGraphic {
     if (!isHealthAppSynced) {
       goalProgress = "$platformHealthName\nNot Sync'd";
       goalProgressInfo = Platform.isIOS
-          ? "Sync your myAPFP App with\na $platformHealthName to set this goal."
-          : "Sync your myAPFP App with\n$platformHealthName to set this goal.";
+          ? "Sync your myFit App with\na $platformHealthName to set this goal."
+          : "Sync your myFit App with\n$platformHealthName to set this goal.";
       percent = 0;
     } else if (!isGoalSet && isHealthAppSynced) {
       goalProgress = "No\nActive\nGoal";
@@ -110,144 +110,6 @@ class HPGraphic {
               Text(goalProgressInfo, style: TextStyle(fontSize: 20))
             ],
           ),
-        ),
-      )),
-    );
-  }
-
-  /// Creates a view to display 'APFP' goals.
-  /// This view should be used with the 'APFP' tab.
-  ///
-  /// Any value passed as a percent must be between 0.0 and 1.0.
-  static InkWell createAPFPView({
-    required Key key,
-    required BuildContext context,
-    required String goal1ProgressInfo,
-    required String goal2ProgressInfo,
-    required String goal3ProgressInfo,
-    required String goal4ProgressInfo,
-    required String goal5ProgressInfo,
-    required double percent1,
-    required double percent2,
-    required double percent3,
-    required double percent4,
-    required double percent5,
-    required Function onLongPress,
-    required ScrollController scrollController,
-    required bool isGoal1Set,
-    required bool isGoal2Set,
-    required bool isGoal3Set,
-    required bool isGoal4Set,
-    required bool isGoal5Set,
-  }) {
-    return InkWell(
-      key: key,
-      onLongPress: () => onLongPress(),
-      child: Container(
-          child: Scrollbar(
-        controller: scrollController,
-        isAlwaysShown: true,
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(height: 25),
-                Text(isGoal1Set ? goal1ProgressInfo : 'Cycling Goal Not Active',
-                    style: TextStyle(fontSize: 20)),
-                SizedBox(height: 5),
-                LinearPercentIndicator(
-                  linearStrokeCap: LinearStrokeCap.butt,
-                  lineHeight: 30,
-                  animation: true,
-                  animationDuration: 1200,
-                  center: isGoal1Set
-                      ? Text("${(percent1 * 100).toStringAsFixed(2)} %",
-                          style: TextStyle(color: Colors.white))
-                      : Text('0.00 %', style: TextStyle(color: Colors.white)),
-                  percent: isGoal1Set ? percent1 : 0.0,
-                  backgroundColor: FlutterFlowTheme.secondaryColor,
-                  progressColor: Colors.green,
-                ),
-                SizedBox(height: 25),
-                Text(isGoal2Set ? goal2ProgressInfo : 'Rowing Goal Not Active',
-                    style: TextStyle(fontSize: 20)),
-                SizedBox(height: 5),
-                LinearPercentIndicator(
-                  linearStrokeCap: LinearStrokeCap.butt,
-                  lineHeight: 30,
-                  animation: true,
-                  animationDuration: 1200,
-                  center: isGoal2Set
-                      ? Text("${(percent2 * 100).toStringAsFixed(2)} %",
-                          style: TextStyle(color: Colors.white))
-                      : Text('0.00 %', style: TextStyle(color: Colors.white)),
-                  percent: isGoal2Set ? percent2 : 0.0,
-                  backgroundColor: FlutterFlowTheme.secondaryColor,
-                  progressColor: Colors.green,
-                ),
-                SizedBox(height: 25),
-                Text(
-                    isGoal3Set
-                        ? goal3ProgressInfo
-                        : 'Step Mill Goal Not Active',
-                    style: TextStyle(fontSize: 20)),
-                SizedBox(height: 5),
-                LinearPercentIndicator(
-                  linearStrokeCap: LinearStrokeCap.butt,
-                  lineHeight: 30,
-                  animation: true,
-                  animationDuration: 1200,
-                  center: isGoal3Set
-                      ? Text("${(percent3 * 100).toStringAsFixed(2)} %",
-                          style: TextStyle(color: Colors.white))
-                      : Text('0.00 %', style: TextStyle(color: Colors.white)),
-                  percent: isGoal3Set ? percent3 : 0.0,
-                  backgroundColor: FlutterFlowTheme.secondaryColor,
-                  progressColor: Colors.green,
-                ),
-                SizedBox(height: 25),
-                Text(
-                    isGoal4Set
-                        ? goal4ProgressInfo
-                        : 'Elliptical Goal Not Active',
-                    style: TextStyle(fontSize: 20)),
-                SizedBox(height: 5),
-                LinearPercentIndicator(
-                  linearStrokeCap: LinearStrokeCap.butt,
-                  lineHeight: 30,
-                  animation: true,
-                  animationDuration: 1200,
-                  center: isGoal4Set
-                      ? Text("${(percent4 * 100).toStringAsFixed(2)} %",
-                          style: TextStyle(color: Colors.white))
-                      : Text('0.00 %', style: TextStyle(color: Colors.white)),
-                  percent: isGoal4Set ? percent4 : 0.0,
-                  backgroundColor: FlutterFlowTheme.secondaryColor,
-                  progressColor: Colors.green,
-                ),
-                SizedBox(height: 25),
-                Text(
-                    isGoal5Set
-                        ? goal5ProgressInfo
-                        : 'Resistance Goal Not Active',
-                    style: TextStyle(fontSize: 20)),
-                SizedBox(height: 5),
-                LinearPercentIndicator(
-                  linearStrokeCap: LinearStrokeCap.butt,
-                  lineHeight: 30,
-                  animation: true,
-                  animationDuration: 1200,
-                  center: isGoal5Set
-                      ? Text("${(percent5 * 100).toStringAsFixed(2)} %",
-                          style: TextStyle(color: Colors.white))
-                      : Text('0.00 %', style: TextStyle(color: Colors.white)),
-                  percent: isGoal5Set ? percent5 : 0.0,
-                  backgroundColor: FlutterFlowTheme.secondaryColor,
-                  progressColor: Colors.green,
-                ),
-                SizedBox(height: 10)
-              ]),
         ),
       )),
     );

@@ -6,8 +6,8 @@ import 'package:integration_test/integration_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  const String emailEx1 = 'bkwalker@bsu.edu';
-  const String emailEx2 = 'apfpapp@gmail.com';
+  const String emailEx1 = 'example@gmail.com';
+  const String emailEx2 = 'myfitapp@gmail.com';
   const String passwordEx = 'password12!';
 
   group('Successful Registration Screen Integration Tests', () {

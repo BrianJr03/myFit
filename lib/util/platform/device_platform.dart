@@ -7,8 +7,8 @@ class DevicePlatform {
 
   /// The user is shown this set of instructions based on their platform.
   static final settingsPath = Platform.isAndroid
-      ? 'To allow or remove access, go to:\n\nSettings -> Privacy -> Permission manager -> Physical activity -> myAPFP\n'
-      : 'To allow or remove access, go to: \n\nSettings -> Privacy -> Health -> myAPFP\n';
+      ? 'To allow or remove access, go to:\n\nSettings -> Privacy -> Permission manager -> Physical activity -> myFit\n'
+      : 'To allow or remove access, go to: \n\nSettings -> Privacy -> Health -> myFit\n';
 
   /// The user is shown this image based on their platform .   
   static final imagePath = Platform.isAndroid

@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import 'dart:async';
 import 'dart:io';
@@ -8,9 +8,7 @@ import '/firebase/firestore.dart';
 
 import '/util/goals/goal.dart';
 import '/util/toasted/toasted.dart';
-import '../../util/goals/apfp_goal.dart';
 import '/util/health/healthUtil.dart';
-import '/util/goals/exercise_time_goal.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -47,9 +45,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   /// Stores a user's goal document snapshots.
   late Map<String, dynamic> _goalSnapshotBackup;
 
-  /// [ScrollController] for [_apfpGoalsView].
-  final _apfpSC = ScrollController();
-
   /// [ScrollController] for [_calsView].
   final _calViewSC = ScrollController();
 
@@ -81,6 +76,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   void initState() {
     super.initState();
+    Goal.updateDayOfMonth();
     _fetchHealthData();
     // Refreshes health data every minute
     Timer.periodic(Duration(minutes: 1), (t) {
@@ -98,7 +94,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   void dispose() {
     super.dispose();
     _disposed = true;
-    _apfpSC.dispose();
     _calViewSC.dispose();
     _stepsViewSC.dispose();
     _milesViewSC.dispose();
@@ -118,33 +113,12 @@ class _HomeWidgetState extends State<HomeWidget> {
       if (mounted) {
         setState(() {
           Goal.userProgressExerciseTime =
-              ExerciseGoal.totalTimeInMinutes(_activitySnapshotBackup);
-          Goal.userProgressCyclingGoal = APFPGoal.calcGoalSums(
-              _activitySnapshotBackup,
-              goalType: "Cycling");
-          Goal.userProgressRowingGoal = APFPGoal.calcGoalSums(
-              _activitySnapshotBackup,
-              goalType: "Rowing");
-          Goal.userProgressStepMillGoal = APFPGoal.calcGoalSums(
-              _activitySnapshotBackup,
-              goalType: "Step-Mill");
-          Goal.userProgressEllipticalGoal = APFPGoal.calcGoalSums(
-              _activitySnapshotBackup,
-              goalType: "Elliptical");
-          Goal.userProgressResistanceStrengthGoal = APFPGoal.calcGoalSums(
-              _activitySnapshotBackup,
-              goalType: "Resistance");
+              Goal.totalTimeInMinutes(_activitySnapshotBackup);
           FireStore.updateGoalData({
             "exerciseTimeGoalProgress": Goal.userProgressExerciseTime,
             "calGoalProgress": Goal.userProgressCalGoal,
             "stepGoalProgress": Goal.userProgressStepGoal,
             "mileGoalProgress": Goal.userProgressMileGoal,
-            "cyclingGoalProgress": Goal.userProgressCyclingGoal,
-            "rowingGoalProgress": Goal.userProgressRowingGoal,
-            "stepMillGoalProgress": Goal.userProgressStepMillGoal,
-            "ellipticalGoalProgress": Goal.userProgressEllipticalGoal,
-            "resistanceStrengthGoalProgress":
-                Goal.userProgressResistanceStrengthGoal,
           });
         });
       }
@@ -162,20 +136,12 @@ class _HomeWidgetState extends State<HomeWidget> {
         _goalSnapshotBackup = element.data()!;
         if (mounted) {
           setState(() {
-            _goalType = "Daily";
             Goal.dayOfMonth = _goalSnapshotBackup['dayOfMonth'];
             Goal.isCalGoalSet = _goalSnapshotBackup['isCalGoalSet'];
             Goal.isStepGoalSet = _goalSnapshotBackup['isStepGoalSet'];
             Goal.isMileGoalSet = _goalSnapshotBackup['isMileGoalSet'];
             Goal.isExerciseTimeGoalSet =
                 _goalSnapshotBackup['isExerciseTimeGoalSet'];
-            Goal.isCyclingGoalSet = _goalSnapshotBackup['isCyclingGoalSet'];
-            Goal.isRowingGoalSet = _goalSnapshotBackup['isRowingGoalSet'];
-            Goal.isStepMillGoalSet = _goalSnapshotBackup['isStepMillGoalSet'];
-            Goal.isEllipticalGoalSet =
-                _goalSnapshotBackup['isEllipticalGoalSet'];
-            Goal.isResistanceStrengthGoalSet =
-                _goalSnapshotBackup['isResistanceStrengthGoalSet'];
             Goal.isHealthAppSynced = _goalSnapshotBackup['isHealthAppSynced'];
             Goal.userCalEndGoal = _goalSnapshotBackup['calEndGoal'].toDouble();
             Goal.userStepEndGoal =
@@ -184,16 +150,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                 _goalSnapshotBackup['mileEndGoal'].toDouble();
             Goal.userExerciseTimeEndGoal =
                 _goalSnapshotBackup['exerciseTimeEndGoal'].toDouble();
-            Goal.userCyclingEndGoal =
-                _goalSnapshotBackup['cyclingEndGoal'].toDouble();
-            Goal.userRowingEndGoal =
-                _goalSnapshotBackup['rowingEndGoal'].toDouble();
-            Goal.userStepMillEndGoal =
-                _goalSnapshotBackup['stepMillEndGoal'].toDouble();
-            Goal.userEllipticalEndGoal =
-                _goalSnapshotBackup['ellipticalEndGoal'].toDouble();
-            Goal.userResistanceStrengthEndGoal =
-                _goalSnapshotBackup['resistanceStrengthEndGoal'].toDouble();
           });
           Goal.uploadCompletedGoals();
         }
@@ -201,7 +157,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     });
   }
 
-  /// Checks if a user has granted physical activity permissions to myAPFP and
+  /// Checks if a user has granted physical activity permissions to myFit and
   /// updates the Firestore database accordingly.
   void _checkIfHealthAppSynced() async {
     FireStore.updateGoalData(
@@ -571,7 +527,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
   }
 
-  /// Creates button that allows user to sync a health app to myAPFP.
+  /// Creates button that allows user to sync a health app to myFit.
   FFButtonWidget _syncHealthAppButton() {
     return FFButtonWidget(
       key: Key("Home.syncHealthAppButton"),

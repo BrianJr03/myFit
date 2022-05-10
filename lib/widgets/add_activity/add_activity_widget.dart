@@ -1,4 +1,4 @@
-// Copyright 2022 The myAPFP Authors. All rights reserved.
+// Copyright 2022 The myFit Authors. All rights reserved.
 
 import 'package:myfit/widgets/confirmation_dialog/confirmation_dialog.dart';
 
@@ -347,7 +347,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
   }
 
   /// Returns a column of 'Effective Activities' radio buttons.
-  Column _apfpActivityRadioButtons() {
+  Column _effectiveActivityRadioButtons() {
     return Column(
       children: [
         Row(
@@ -458,7 +458,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                         ],
                       ),
                     ),
-                    _apfpActivityRadioButtons(),
+                    _effectiveActivityRadioButtons(),
                     Align(
                       alignment: AlignmentDirectional(0, 0),
                       child: Padding(
