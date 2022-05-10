@@ -16,18 +16,6 @@ class FireStore {
     return FirebaseFirestore.instance.collection('youtube-videos').snapshots();
   }
 
-  /// Stores a user's UID in their associated document in the registered-users
-  /// Firestore collection.
-  ///
-  /// This is to allow an admin to delete a user's account via the admin panel.
-  /// In order to delete a user's account, you must have their UID.
-  static void storeUID(String docId, String uid) {
-    FirebaseFirestore.instance
-        .collection('registered-users')
-        .doc(docId)
-        .update({"UID": uid});
-  }
-
   /// Fetches the user's activity document in Firestore.
   static DocumentReference<Map<String, dynamic>> getUserActivityDocument() {
     return FirebaseFirestore.instance
