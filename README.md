@@ -1,5 +1,5 @@
 # myFit
-myFit is an app that is intended for anyone looking for a bit of fitness in their lives. 
+myFit is an app that is intended for anyone looking to add a bit of fitness to their lives. Users can monitor health stats such as calories, steps, and miles, view exercise videos in-app, and log activies. myFit also features a simple, easy-to-use goals system which allows a user to set daily goals, promoting a healthier lifestyle.
 
 ## How to Run
 This application is in development and may be prone to bugs/issues/crashes. Run application at own risk.
