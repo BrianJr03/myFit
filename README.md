@@ -1,5 +1,5 @@
 # myFit
-myFit is an app that is intended for anyone looking for a bit of fitness in their lives. 
+myFit is an app that is intended for anyone looking to add a bit of fitness to their lives. 
 
 ## How to Run
 This application is in development and may be prone to bugs/issues/crashes. Run application at own risk.
