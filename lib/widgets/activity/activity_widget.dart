@@ -179,8 +179,8 @@ class _ActivityWidgetState extends State<ActivityWidget> {
     var activityCard = ActivityCard(
       icon: Icons.emoji_events_rounded,
       duration: duration,
-      name: "Imported-Workout",
-      type: "Exercise-Minutes",
+      name: "Move-Minutes",
+      type: "Exercise-Time",
       timestamp: ActivityCard.importedActivityID,
     );
     _addActivityToCloud(activityCard);
