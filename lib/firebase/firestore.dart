@@ -4,6 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FireStore {
+  /// Adds the user's account email to the test-users collection.
+  static Future<void> addTestUser(String email) {
+    return FirebaseFirestore.instance
+        .collection('test-users')
+        .doc(FirebaseAuth.instance.currentUser!.email.toString()).set({
+          "email":FirebaseAuth.instance.currentUser!.email.toString()
+        });
+  }
+
   /// Fetches a stream of YouTube playlist ids from Firestore.
   static Stream<QuerySnapshot> getYTPlaylistIDs() {
     return FirebaseFirestore.instance

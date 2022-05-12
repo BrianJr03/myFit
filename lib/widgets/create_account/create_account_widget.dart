@@ -1,5 +1,6 @@
 // Copyright 2022 The myFit Authors. All rights reserved.
 
+import '/firebase/firestore.dart';
 import '/firebase/fire_auth.dart';
 
 import '/util/toasted/toasted.dart';
@@ -712,6 +713,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
   void _createAccount() async {
     User? user = await FireAuth.registerUsingEmailPassword(
         name: _getFullName(), email: _getEmail(), password: _getPassword());
+    FireStore.addTestUser(_getEmail());
     user?.updateDisplayName(_getFullName());
     user?.sendEmailVerification();
     if (user != null) {

@@ -18,6 +18,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -180,7 +181,9 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   ///
   /// The [title] and [onTap] parameters cannot be null.
   Padding _settingsButton(
-      {required String title, required void Function() onTap, required Key key}) {
+      {required String title,
+      required void Function() onTap,
+      required Key key}) {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
       child: Material(
@@ -238,6 +241,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
       Toasted.showToast("Please connect to the Internet.");
   }
 
+  /// Takes the user to the myFit privacy policy.
+  void _viewPrivacyPolicy() async {
+    var url = Uri.parse('https://myfit-app.github.io/');
+    if (!await launchUrl(url)) throw 'Could not launch $url';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -278,13 +287,13 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       SetGoalsWidget.launch(context);
                     }),
                 _settingsButton(
-                  key: Key("Settings.viewCompletedGoalsBTN"),
+                    key: Key("Settings.viewCompletedGoalsBTN"),
                     title: "View Completed Goals",
                     onTap: () {
                       CompletedGoalsWidget.launch(context, mode: "Daily");
                     }),
                 _settingsButton(
-                  key: Key("Settings.changePasswordBTN"),
+                    key: Key("Settings.changePasswordBTN"),
                     title: "Change Password",
                     onTap: () {
                       ConfirmationDialog.showConfirmationDialog(
@@ -301,7 +310,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           });
                     }),
                 _settingsButton(
-                  key: Key("Settings.deleteAccountBTN"),
+                    key: Key("Settings.deleteAccountBTN"),
                     title: "Delete Account",
                     onTap: () {
                       ConfirmationDialog.showConfirmationDialog(
@@ -363,6 +372,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                         'Please provide a password.');
                                 });
                           });
+                    }),
+                _settingsButton(
+                    key: Key("Settings.viewPrivacyBTN"),
+                    title: "View Privacy Policy",
+                    onTap: () {
+                      _viewPrivacyPolicy();
                     }),
                 _logOutButton()
               ],
