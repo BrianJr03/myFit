@@ -44,12 +44,25 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                child: Text('Privacy Policy',
+                    style: FlutterFlowTheme.title1),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                child: Text(
+                    'Our privacy policy details what myFit intends on' +
+                    ' doing with your personal data that you provide / allow access to.' +
+                    ' This includes health data. A link to this policy can be found in Settings.',
+                    style: FlutterFlowTheme.bodyText1),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                 child: Text('Connecting to ${DevicePlatform.platformHealthName}',
                     style: FlutterFlowTheme.title1),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 30, 20, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                 child: Text(
                     'Activity information from fitness trackers can be imported to myFit via the Refresh icon on the Activity page. If permissions are initially denied, ${DevicePlatform.platformHealthName} can be synchronized to the app using your system settings.\n\n' +
                         'This will allow you to connect a linked activity tracker, such as Fitbit, to the myFit app.\n\n' +
@@ -70,7 +83,7 @@ class _HealthAppInfoState extends State<HealthAppInfo> {
                     'From here, choose whether you allow or  don\'t allow myFit to access your physical activity data.',
                     style: FlutterFlowTheme.bodyText1),
               ),
-              SizedBox(height: 5)
+              SizedBox(height: 10)
             ],
           ),
         ),
