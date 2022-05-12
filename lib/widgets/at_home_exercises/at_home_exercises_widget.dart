@@ -164,7 +164,7 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
   void _preloadVideo({required String url, required String type}) async {
     YoutubeExplode yt = YoutubeExplode();
     Video video = await yt.videos.get(url);
-    VideoCard videoCard = VideoCard(video: video);
+    VideoCard videoCard = VideoCard(video: video, videoType: "ytVid");
     _addVideoToList(videoCard, type);
     _videoBackup.add(videoCard);
     yt.close();
@@ -175,7 +175,7 @@ class _AtHomeExercisesWidgetState extends State<AtHomeExercisesWidget> {
     YoutubeExplode yt = YoutubeExplode();
     Playlist playlist = await yt.playlists.get(id);
     await for (Video video in yt.playlists.getVideos(playlist.id)) {
-      VideoCard videoCard = VideoCard(video: video);
+      VideoCard videoCard = VideoCard(video: video, videoType: "ytPlaylist");
       _addVideoToList(videoCard, type);
       _playlistBackup.add(videoCard);
     }

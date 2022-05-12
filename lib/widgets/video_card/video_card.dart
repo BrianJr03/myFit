@@ -8,7 +8,18 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class VideoCard extends StatelessWidget {
   final Video video;
-  const VideoCard({Key? key, required this.video}) : super(key: key);
+  final String videoType;
+
+  const VideoCard({Key? key, required this.video, required this.videoType})
+      : super(key: key);
+
+  String _videoInfo() {
+    DateTime? publishDate = video.publishDate;
+    String views = NumberFormat.compact().format(video.engagement.viewCount);
+    if (videoType == "ytVid")
+      return '${video.author} • $views views • ${timeago.format(publishDate!)}';
+    return '${video.author} • Playlist';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +27,6 @@ class VideoCard extends StatelessWidget {
     if (video.duration!.inMinutes < 59) {
       duration = duration.substring(2, 7);
     }
-    String views = NumberFormat.compact().format(video.engagement.viewCount);
     return InkWell(
       onTap: () async {
         await Navigator.push(
@@ -65,9 +75,9 @@ class VideoCard extends StatelessWidget {
                                   .textTheme
                                   .bodyText1!
                                   .copyWith(fontSize: 15.0))),
+                      SizedBox(height: 5),
                       Flexible(
-                        child: Text(
-                            '${video.author} • $views views • ${timeago.format(video.publishDate!)}',
+                        child: Text(_videoInfo(),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
