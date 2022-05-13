@@ -241,7 +241,7 @@ class _NavBarPageState extends State<NavBarPage> with WidgetsBindingObserver {
           ),
           BottomNavigationBarItem(
             icon: FaIcon(
-              FontAwesomeIcons.heartbeat,
+              FontAwesomeIcons.heartPulse,
               size: 40,
             ),
             label: 'Activity',

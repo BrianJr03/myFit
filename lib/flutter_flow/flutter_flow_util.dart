@@ -12,8 +12,7 @@ export 'package:page_transition/page_transition.dart';
 T valueOrDefault<T>(T value, T defaultValue) =>
     (value is String && value.isEmpty) || value == null ? defaultValue : value;
 
-String dateTimeFormat(String format, DateTime dateTime) {
-  // ignore: unnecessary_null_comparison, flutterflow method
+String dateTimeFormat(String format, DateTime? dateTime) {
   if (dateTime == null) {
     return '';
   }
@@ -24,9 +23,9 @@ String dateTimeFormat(String format, DateTime dateTime) {
 }
 
 Future launchURL(String url) async {
-  var uri = Uri.parse(url).toString();
+  var uri = Uri.parse(url);
   try {
-    await launch(uri);
+    await launchUrl(uri);
   } catch (e) {
     throw 'Could not launch $uri: $e';
   }
